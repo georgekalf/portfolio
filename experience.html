@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Work Experience - Georgios Kalfas</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <h1 class="logo">Georgios Kalfas</h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="experience.html" class="active">Experience</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle dark/light theme">🌙</button>
+    </div>
+  </nav>
+
+  <main class="page container fade-in">
+    <h2>Work Experience</h2>
+
+    <div class="tabs oval-tabs" role="tablist" aria-label="Work Experience Tabs">
+      <button role="tab" aria-selected="true" aria-controls="ishango" id="tab-ishango" class="tab-button active" data-tab="ishango">Ishango LTD Co.</button>
+      <button role="tab" aria-selected="false" aria-controls="fiat" id="tab-fiat" class="tab-button" data-tab="fiat">Fiat 500 Project</button>
+      <button role="tab" aria-selected="false" aria-controls="getharley" id="tab-getharley" class="tab-button" data-tab="getharley">GetHarley</button>
+      <button role="tab" aria-selected="false" aria-controls="army" id="tab-army" class="tab-button" data-tab="army">Hellenic Army</button>
+      <button role="tab" aria-selected="false" aria-controls="bank" id="tab-bank" class="tab-button" data-tab="bank">Bank of Greece</button>
+    </div>
+
+    <section id="ishango" role="tabpanel" aria-labelledby="tab-ishango" class="tab-content active">
+      <ul>
+        <li>Rebuilt Azure-deployed ETL pipelines using DuckDB, Parquet, and Polars, cutting processing time by 50%+ (6 min → 2-3 min) for datasets with 1.5M+ rows across multiple clients</li>
+        <li>Built PowerBI dashboards and FastAPI endpoints used by 20+ internal and client stakeholders, reducing reporting delays and supporting data-driven client strategy decisions</li>
+        <li>Reduced support ticket resolution time to &lt;1 day by building scalable SQL workflows for RCA on datasets with 2M+ rows</li>
+        <li>Led client-facing delivery of a bespoke application, driving £60k contract growth by presenting ROI-driven enhancements and managing the full project lifecycle</li>
+        <li>Migrated and synchronized operative data across two platforms using APIs, eliminating manual entry & ensuring cross-system consistency in timesheet reporting</li>
+        <li>Improved Azure-deployed data functions by integrating dynamic database logic & automating edge-case handling, eliminating manual updates, & boosting reliability across multiple client solutions</li>
+        <li>Mentored a junior analyst through a tailored onboarding plan, increasing team output and strengthening internal analytics capabilities</li>
+      </ul>
+    </section>
+
+    <section id="fiat" role="tabpanel" aria-labelledby="tab-fiat" class="tab-content">
+      <ul>
+        <li>Collected 10k+ YouTube comments via API and conducted sentiment analysis using NLP to assess public perception of Fiat 500 electric vs hybrid models</li>
+        <li>Mapped user influence and engagement networks using Python’s network analysis library to reveal community dynamics and key opinion leaders</li>
+      </ul>
+    </section>
+
+    <section id="getharley" role="tabpanel" aria-labelledby="tab-getharley" class="tab-content">
+      <ul>
+        <li>Automated monthly reporting workflows by integrating APIs (Stripe, Calendly, Acuity, Google Calendar) using Python and SQL, saving 6+ hours/week of manual work</li>
+        <li>Delivered monthly and quarterly reports by running Python scripts and presented the most important insights to the managers</li>
+        <li>Collaborated with the data team to deploy Heroku–hosted scripts and PostgreSQL pipelines, delivering ad hoc and scheduled reports</li>
+      </ul>
+    </section>
+
+    <section id="army" role="tabpanel" aria-labelledby="tab-army" class="tab-content">
+      <ul>
+        <li>Maintained digital records, using Excel, of military vehicle movements and ensured accurate reporting to command leadership</li>
+        <li>Led a team of 6 to reorganize and optimize warehouse logistics, improving inventory access and labeling efficiency</li>
+        <li>Ensured military base security through dedicated 6-hour patrols in teams of 2, reporting any concerning observations every 45 minutes to the Major</li>
+      </ul>
+    </section>
+
+    <section id="bank" role="tabpanel" aria-labelledby="tab-bank" class="tab-content">
+      <ul>
+        <li>Mentored, and guided two new interns in the department, provided guidance, & constructive feedback to foster their growth within the team</li>
+        <li>Produced daily economic briefings and analytics using Bloomberg/Reuters for senior leadership, including the Governor</li>
+        <li>Conducted macroeconomic research and synthesized findings into strategic reports to inform policy decisions</li>
+        <li>Monitored & tracked global economies, delivered daily report to my supervisor, collected, and analyzed data to make informed business decisions</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
