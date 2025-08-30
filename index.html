@@ -1,35 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-  <title>Georgios Kalfas - Home</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Georgios Kalfas - Data Analytics Engineer</title>
+<link rel="stylesheet" href="style.css" />
 </head>
-<body class="dark-mode">
+<body data-theme="dark">
   <nav class="navbar">
-    <h1>Georgios Kalfas</h1>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="work.html">Work</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="resume.html">Resume</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <button class="theme-toggle" id="theme-toggle">🌙</button>
+    <div class="nav-container">
+      <h1 class="logo">Georgios Kalfas</h1>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="experience.html" class="nav-link">Experience</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+    </div>
   </nav>
-  <section class="page">
-    <img src="images/profile.jpg" alt="Profile Picture" class="profile-pic" />
-    <h2>Hello, I'm Georgios</h2>
-    <p>
-      Tech enthusiast with a knack for leveraging data insights to solve intricate challenges. 
-      I'm a multifaceted professional blending a background in Marketing and Communications 
-      with robust expertise in Business Analytics and Data Science. 
-      Currently working as a Data Analytics Engineer.
-    </p>
-    <a href="projects.html" class="cta-button">View My Work</a>
-  </section>
-  <script src="script.js"></script>
+
+  <main class="main-content">
+    <section class="section hero active">
+      <div class="hero-inner">
+        <div class="profile-column">
+          <div class="profile-container">
+            <img src="images/profile.jpg" alt="Georgios Kalfas" class="profile-pic" />
+          </div>
+        </div>
+
+        <div class="about-column">
+          <h1>Hello, I'm Georgios</h1>
+          <p class="subtitle">
+            Tech enthusiast leveraging data insights to solve complex challenges. 
+            Multifaceted professional blending Marketing, Business Analytics, and Data Science expertise.
+          </p>
+          <div class="about-box">
+            <p>
+              I'm a Data Analytics Engineer proficient in Python, SQL, R, and more. I specialize in building data pipelines, dashboards, and predictive models that drive actionable business insights.
+            </p>
+            <p>
+              <strong>Education:</strong> MSc Business Analytics, Bayes Business School; BSc Marketing & Communications, Athens University of Economics.
+            </p>
+          </div>
+          <div class="cta-buttons">
+            <a href="projects.html" class="btn btn-primary">View My Work</a>
+            <a href="contact.html" class="btn btn-secondary">Get In Touch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script src="script.js"></script>
 </body>
 </html>

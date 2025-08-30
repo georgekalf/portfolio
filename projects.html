@@ -1,35 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projects - Georgios Kalfas</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Projects - Georgios Kalfas</title>
+<link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <nav class="navbar">
-    <h1>Georgios Kalfas</h1>
+<body data-theme="dark">
+<nav class="navbar">
+  <div class="nav-container">
+    <h1 class="logo">Georgios Kalfas</h1>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="work.html">Work</a></li>
-      <li><a href="projects.html" class="active">Projects</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="experience.html" class="nav-link">Experience</a></li>
+      <li><a href="projects.html" class="nav-link active">Projects</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
     </ul>
-    <button class="theme-toggle">🌙</button>
-  </nav>
+    <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+  </div>
+</nav>
 
-  <section class="page">
-    <h2>Projects</h2>
-
-    <div class="filter-bar">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <!-- language filters injected here -->
+<main class="main-content">
+  <section id="projects" class="section">
+    <h2>My Projects</h2>
+    <div class="filter-controls">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
     </div>
-
-    <div class="project-grid"></div>
+    <div id="projects-grid" class="projects-grid">
+      <div class="loading">
+        <div class="spinner"></div>
+        <p>Loading projects...</p>
+      </div>
+    </div>
   </section>
+</main>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
