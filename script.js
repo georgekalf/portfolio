@@ -1,7 +1,6 @@
 // =====================================
-// THEME TOGGLE (with persistence)
+// THEME TOGGLE (always start in dark)
 // =====================================
-const THEME_KEY = 'gk-theme-preference';
 const themeToggle = document.querySelector('.theme-toggle');
 
 function applyTheme(theme) {
@@ -14,15 +13,14 @@ function applyTheme(theme) {
 
 (function initTheme() {
   if (!themeToggle) return;
-  const stored = window.localStorage.getItem(THEME_KEY);
-  const initial = stored || document.body.getAttribute('data-theme') || 'dark';
-  applyTheme(initial);
+
+  // Always start in dark mode on page load
+  applyTheme('dark');
 
   themeToggle.addEventListener('click', () => {
     const current = document.body.getAttribute('data-theme') || 'dark';
     const next = current === 'dark' ? 'light' : 'dark';
     applyTheme(next);
-    window.localStorage.setItem(THEME_KEY, next);
   });
 })();
 
