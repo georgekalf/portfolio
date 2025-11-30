@@ -56,13 +56,15 @@ let projectsData = [];
 const fallbackProjects = [
   {
     name: 'Wind Turbines Health Prediction',
-    description: 'RNN & CNN time-series models in Python with TensorFlow for wind turbine health monitoring.',
+    description:
+      'RNN & CNN time-series models in Python with TensorFlow for wind turbine health monitoring.',
     languages: ['Python', 'TensorFlow'],
     html_url: 'https://github.com/georgekalf'
   },
   {
     name: 'Insurance Fraud Detection',
-    description: 'Autoencoder-based anomaly detection for insurance claim fraud in Python.',
+    description:
+      'Autoencoder-based anomaly detection for insurance claim fraud in Python.',
     languages: ['Python', 'TensorFlow'],
     html_url: 'https://github.com/georgekalf'
   }
@@ -124,10 +126,12 @@ async function loadProjects() {
             if (match && match[1]) {
               let imgPath = match[1].trim();
 
-              // Handle angle brackets <> or quotes in URLs if any
               imgPath = imgPath.replace(/^</, '').replace(/>$/, '');
 
-              if (imgPath.startsWith('http://') || imgPath.startsWith('https://')) {
+              if (
+                imgPath.startsWith('http://') ||
+                imgPath.startsWith('https://')
+              ) {
                 imageUrl = imgPath;
               } else {
                 const branch = repo.default_branch || 'main';

@@ -428,6 +428,80 @@ body {
   text-decoration: underline;
 }
 
+/* EDUCATION */
+
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.4rem;
+}
+
+.education-card {
+  background: radial-gradient(circle at top left, var(--accent-soft), var(--bg-card));
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 1rem 1.2rem;
+  color: var(--text-secondary);
+  font-size: 0.94rem;
+}
+
+.edu-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.edu-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: #ffffff;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.edu-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.edu-degree {
+  margin: 0.05rem 0;
+  font-weight: 500;
+}
+
+.edu-meta {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.edu-description {
+  margin: 0.5rem 0;
+}
+
+.edu-list {
+  margin: 0.4rem 0 0.3rem;
+  padding-left: 1.1rem;
+}
+
+.edu-list li {
+  margin-bottom: 0.2rem;
+}
+
+.edu-extra {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  opacity: 0.95;
+}
+
 /* LOADING */
 
 .spinner {
