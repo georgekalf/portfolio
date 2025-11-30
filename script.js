@@ -83,7 +83,8 @@ document.addEventListener('DOMContentLoaded', function () {
         'Explores hotel reservation data with EDA and KMeans clustering to segment guests and understand booking behaviour. Trains multiple ML models to predict cancellations and compare performance.',
       languages: ['Python', 'ML', 'Clustering'],
       html_url: 'https://github.com/georgekalf',
-      image_url: contextImages.hotel
+      image_url: contextImages.hotel,
+      categories: ['Machine Learning', 'Data Analysis']
     },
     {
       name: 'Time Series RNN CNN',
@@ -92,7 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
         'Time series modelling framework using TensorFlow and Keras with LSTM and CNN architectures, including preprocessing utilities and training visualisations.',
       languages: ['Python', 'TensorFlow', 'Keras'],
       html_url: 'https://github.com/georgekalf',
-      image_url: contextImages.timeseries
+      image_url: contextImages.timeseries,
+      categories: ['Machine Learning', 'Deep Learning']
     }
   ];
 
@@ -236,7 +238,9 @@ document.addEventListener('DOMContentLoaded', function () {
           html_url: repo.html_url,
           languages: languages,
           image_url: imageUrl || null,
-          friendly_title: null
+          friendly_title: null,
+          // default category for anything not manually overridden
+          categories: ['Data Analysis']
         });
       }
 
@@ -251,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
     setupProjectFilters();
   }
 
-  // Apply custom titles/descriptions/images for key repos
+  // Apply custom titles/descriptions/images/categories for key repos
   function applyProjectOverrides() {
     projectsData.forEach(function (p) {
       var lower = p.name.toLowerCase();
@@ -262,6 +266,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'Customer segmentation using RFM and KMeans clustering (with kernel PCA) to create actionable customer groups and targeted marketing strategies.';
         p.languages = ['Python', 'R', 'Clustering', 'RFM'];
+        p.categories = ['Machine Learning', 'Data Analysis'];
         if (!p.image_url) {
           p.image_url =
             'https://raw.githubusercontent.com/georgekalf/Customer-segmentation/main/too-broad-customer-segmentation.jpeg';
@@ -275,6 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'Explores hotel reservation data with EDA and KMeans clustering to segment guests and understand booking patterns. Trains multiple ML models to predict cancellations and compare performance.';
         p.languages = ['Python', 'ML', 'Clustering', 'XGBoost'];
+        p.categories = ['Machine Learning', 'Data Analysis'];
         if (!p.image_url) {
           p.image_url = contextImages.hotel;
         }
@@ -286,6 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'Web scraping projects including NBA defensive analysis and Aldi job postings intelligence. Uses Python and APIs to collect, clean and analyse data for actionable recommendations.';
         p.languages = ['Python', 'Web Scraping', 'APIs'];
+        p.categories = ['Data Analysis'];
         if (!p.image_url) {
           p.image_url = contextImages.scraping;
         }
@@ -300,6 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'Data management project using MongoDB and PyMongo to store, restructure and analyse GitHub OSS data. Focuses on querying commits, authors and activity patterns.';
         p.languages = ['Python', 'MongoDB', 'PyMongo', 'PySpark'];
+        p.categories = ['Data Analysis'];
         if (!p.image_url) {
           p.image_url =
             'https://raw.githubusercontent.com/georgekalf/data-management-mongodb/main/pymongo.jpg';
@@ -316,6 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'Visual exploration of COVID-19 impact on UK businesses from 2019–2021 using Seaborn and Plotly, with interactive and animated charts across industries.';
         p.languages = ['Python', 'Seaborn', 'Plotly', 'Data Viz'];
+        p.categories = ['Data Analysis'];
         if (!p.image_url) {
           p.image_url = contextImages.viz;
         }
@@ -331,6 +340,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'ML exercises in R covering dimensionality reduction, clustering and classification. Includes decision trees, random forests, SVMs, kNN, LDA and cross-validation on datasets like German credit and medical data.';
         p.languages = ['R', 'ML', 'Clustering', 'Classification'];
+        p.categories = ['Machine Learning'];
         if (!p.image_url) {
           p.image_url = contextImages.mlr;
         }
@@ -342,6 +352,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'Network analysis of security traders’ knowledge-sharing relationships and attitudes toward AI on a trading floor, using graph metrics and positional data.';
         p.languages = ['Python', 'NetworkX', 'Graph Analytics'];
+        p.categories = ['Data Analysis', 'Machine Learning'];
         if (!p.image_url) {
           p.image_url = contextImages.network;
         }
@@ -357,6 +368,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'Credit risk modelling using bank client data with demographics, payment history and bill statements. Builds models to estimate default likelihood and identify key drivers for lending decisions.';
         p.languages = ['Python', 'ML', 'Risk Modelling'];
+        p.categories = ['Machine Learning', 'Finance'];
         if (!p.image_url) {
           p.image_url = contextImages.loans;
         }
@@ -368,6 +380,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'Interactive R Shiny app for drug recommendation and classification built as part of MSc work, predicting appropriate medications from patient characteristics.';
         p.languages = ['R', 'Shiny', 'Classification'];
+        p.categories = ['Machine Learning', 'Web Development'];
         if (!p.image_url) {
           p.image_url = contextImages.shiny;
         }
@@ -379,6 +392,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'Time series analysis framework using TensorFlow and Keras with LSTM and CNN architectures, plus preprocessing utilities and training/validation visualisations.';
         p.languages = ['Python', 'TensorFlow', 'Keras', 'Time Series'];
+        p.categories = ['Machine Learning', 'Deep Learning'];
         if (!p.image_url) {
           p.image_url = contextImages.timeseries;
         }
@@ -400,6 +414,11 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'Project details coming soon – see GitHub for more information.';
       }
+
+      // Ensure categories always exist
+      if (!p.categories || !p.categories.length) {
+        p.categories = ['Data Analysis'];
+      }
     });
   }
 
@@ -412,7 +431,7 @@ document.addEventListener('DOMContentLoaded', function () {
       filtered = projectsData;
     } else {
       filtered = projectsData.filter(function (p) {
-        return p.languages.indexOf(filter) !== -1;
+        return p.categories && p.categories.indexOf(filter) !== -1;
       });
     }
 
@@ -458,25 +477,37 @@ document.addEventListener('DOMContentLoaded', function () {
   function setupProjectFilters() {
     if (!filterControls || !projectsData.length) return;
 
-    // Collect unique languages
-    var allLanguages = [];
+    // Collect unique categories actually used
+    var allCategories = [];
     projectsData.forEach(function (p) {
-      p.languages.forEach(function (lang) {
-        if (allLanguages.indexOf(lang) === -1) {
-          allLanguages.push(lang);
+      var cats = p.categories || ['Data Analysis'];
+      cats.forEach(function (cat) {
+        if (allCategories.indexOf(cat) === -1) {
+          allCategories.push(cat);
         }
       });
     });
 
+    // Preferred order of category buttons
+    var preferredOrder = [
+      'Machine Learning',
+      'Deep Learning',
+      'Data Analysis',
+      'Finance',
+      'Web Development'
+    ];
+
     filterControls.innerHTML =
       '<button class="filter-btn active" data-filter="all">All Projects</button>';
 
-    allLanguages.forEach(function (lang) {
-      var btn = document.createElement('button');
-      btn.className = 'filter-btn';
-      btn.setAttribute('data-filter', lang);
-      btn.textContent = lang;
-      filterControls.appendChild(btn);
+    preferredOrder.forEach(function (cat) {
+      if (allCategories.indexOf(cat) !== -1) {
+        var btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.setAttribute('data-filter', cat);
+        btn.textContent = cat;
+        filterControls.appendChild(btn);
+      }
     });
 
     filterControls.addEventListener('click', function (e) {
