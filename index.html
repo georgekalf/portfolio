@@ -9,53 +9,60 @@
 <body data-theme="dark">
   <nav class="navbar">
     <div class="nav-container">
-      <h1 class="logo">Georgios Kalfas</h1>
+      <a href="index.html" class="logo">Georgios Kalfas</a>
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link active">Home</a></li>
-        <li><a href="experience.html" class="nav-link"><span class="nav-emoji">💼</span>Experience</a></li>
-        <li><a href="projects.html" class="nav-link"><span class="nav-emoji">👩🏻‍💻💻</span>Projects</a></li>
-        <li><a href="education.html" class="nav-link"><span class="nav-emoji">🎓</span>Education</a></li>
-        <li><a href="about.html" class="nav-link"><span class="nav-emoji">🙋‍♂️</span>About</a></li>
-        <li><a href="contact.html" class="nav-link"><span class="nav-emoji">✉️</span>Contact</a></li>
+        <li><a href="experience.html" class="nav-link">💼 Experience</a></li>
+        <li><a href="projects.html" class="nav-link">👩🏻‍💻💻 Projects</a></li>
+        <li><a href="education.html" class="nav-link">🎓 Education</a></li>
+        <li><a href="about.html" class="nav-link">👤 About</a></li>
+        <li><a href="contact.html" class="nav-link">✉️ Contact</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle theme"></button>
+      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
     </div>
   </nav>
 
   <main class="main-content">
     <section class="section hero active">
       <div class="hero-inner">
+        <!-- Profile column -->
         <div class="profile-column">
           <div class="profile-container">
             <img src="images/profile.jpg" alt="Georgios Kalfas" class="profile-pic" />
           </div>
         </div>
 
+        <!-- About / intro column -->
         <div class="about-column">
-          <h1 class="hero-title">
-            Hi, I'm <span>Georgios</span>
-          </h1>
-          <p class="hero-role">Data Analytics Engineer · Machine Learning & NLP</p>
+          <h1>Hello, I'm Georgios</h1>
           <p class="subtitle">
             Tech enthusiast with a knack for leveraging data insights to solve intricate challenges.
-            I’m a multifaceted professional blending a background in Marketing &amp; Communications with
-            robust expertise in Business Analytics and Data Science.
+            I blend a background in Marketing and Communications with deep expertise in Business
+            Analytics and Data Science.
           </p>
+
           <div class="about-box">
             <p>
-              I’m proficient in a versatile tech stack encompassing Python (scikit-learn, NumPy, Pandas, PyTorch,
-              Matplotlib, TensorFlow, NLTK, spaCy, Selenium, BeautifulSoup), SQL (PostgreSQL, MySQL),
-              Google Sheets Query, NLP, R, Excel, Google Sheets, and SPSS.
+              I’m a Data Analytics Engineer working across Machine Learning, Deep Learning,
+              NLP and data visualisation. My toolkit includes Python (scikit-learn, NumPy,
+              Pandas, TensorFlow, PyTorch, NLTK, spaCy, Selenium, BeautifulSoup), SQL
+              (PostgreSQL, MySQL), R, Excel, Google Sheets and SPSS.
             </p>
             <p>
-              My experience spans diverse projects involving Machine Learning, Deep Learning, Natural Language
-              Processing, and Data Visualization. I’m eager to apply this skill set to transform data into actionable
-              strategies and drive innovation.
+              I enjoy turning messy, complex datasets into clean, actionable insights that
+              support strategy, automation and product decisions.
             </p>
           </div>
+
           <div class="cta-buttons">
-            <a href="projects.html" class="btn btn-primary">View My Work</a>
-            <a href="experience.html" class="btn btn-secondary">Experience</a>
+            <!-- Put your CV PDF in the same folder as index.html with this filename
+                 or update the href path accordingly -->
+            <a href="CV-GeorgiosKalfas.pdf"
+               class="btn btn-primary"
+               target="_blank"
+               rel="noopener">
+              View Resume
+            </a>
           </div>
         </div>
       </div>

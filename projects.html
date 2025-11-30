@@ -9,28 +9,32 @@
 <body data-theme="dark">
   <nav class="navbar">
     <div class="nav-container">
-      <h1 class="logo">Georgios Kalfas</h1>
+      <a href="index.html" class="logo">Georgios Kalfas</a>
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="experience.html" class="nav-link"><span class="nav-emoji">💼</span>Experience</a></li>
-        <li><a href="projects.html" class="nav-link active"><span class="nav-emoji">👩🏻‍💻💻</span>Projects</a></li>
-        <li><a href="education.html" class="nav-link"><span class="nav-emoji">🎓</span>Education</a></li>
-        <li><a href="about.html" class="nav-link"><span class="nav-emoji">🙋‍♂️</span>About</a></li>
-        <li><a href="contact.html" class="nav-link"><span class="nav-emoji">✉️</span>Contact</a></li>
+        <li><a href="experience.html" class="nav-link">💼 Experience</a></li>
+        <li><a href="projects.html" class="nav-link active">👩🏻‍💻💻 Projects</a></li>
+        <li><a href="education.html" class="nav-link">🎓 Education</a></li>
+        <li><a href="about.html" class="nav-link">👤 About</a></li>
+        <li><a href="contact.html" class="nav-link">✉️ Contact</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle theme"></button>
+      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
     </div>
   </nav>
 
   <main class="main-content">
-    <section id="projects" class="section">
-      <h2>My Projects</h2>
-      <p class="section-subtitle">Selected work from my GitHub – fetched dynamically and grouped by tech.</p>
+    <section class="section projects-section active">
+      <h1 class="page-title">My Projects</h1>
+
+      <!-- Subtitle removed as requested -->
 
       <div class="filter-controls">
+        <!-- Buttons are created / updated by script.js based on categories -->
         <button class="filter-btn active" data-filter="all">All Projects</button>
       </div>
+
       <div id="projects-grid" class="projects-grid">
+        <!-- Dynamic projects from GitHub are injected here by script.js -->
         <div class="loading">
           <div class="spinner"></div>
           <p>Loading projects...</p>
