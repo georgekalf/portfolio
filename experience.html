@@ -11,78 +11,132 @@
     <div class="nav-container">
       <h1 class="logo">Georgios Kalfas</h1>
       <ul class="nav-links">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="experience.html" class="nav-link active">Experience</a></li>
-        <li><a href="projects.html" class="nav-link">Projects</a></li>
-        <li><a href="education.html" class="nav-link">Education</a></li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="index.html" class="nav-link"><span class="nav-emoji">🏠</span>Home</a></li>
+        <li><a href="experience.html" class="nav-link active"><span class="nav-emoji">💼</span>Experience</a></li>
+        <li><a href="projects.html" class="nav-link"><span class="nav-emoji">👩🏻‍💻💻</span>Projects</a></li>
+        <li><a href="education.html" class="nav-link"><span class="nav-emoji">🎓</span>Education</a></li>
+        <li><a href="about.html" class="nav-link"><span class="nav-emoji">🙋‍♂️</span>About</a></li>
+        <li><a href="contact.html" class="nav-link"><span class="nav-emoji">✉️</span>Contact</a></li>
       </ul>
       <button class="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </nav>
 
   <main class="main-content">
-    <section class="section">
+    <section class="section timeline-section">
       <h2>Professional Experience</h2>
+      <p class="section-subtitle">My professional journey in analytics and data science.</p>
 
-      <div class="experience-tabs">
-        <button class="tab-btn active" data-tab="ishango">Ishango LTD</button>
-        <button class="tab-btn" data-tab="fiat">Fiat 500 Project</button>
-        <button class="tab-btn" data-tab="getharley">GetHarley</button>
-        <button class="tab-btn" data-tab="army">Hellenic Army</button>
-        <button class="tab-btn" data-tab="bank">Bank of Greece</button>
-      </div>
+      <div class="timeline">
+        <div class="timeline-line"></div>
 
-      <div id="ishango" class="experience-content active">
-        <h3>Data Analyst · Ishango LTD Co., London, UK (Sept 2022 – Present)</h3>
-        <ul>
-          <li>Rebuilt Azure-deployed ETL pipelines using DuckDB, Parquet, and Polars, cutting processing time by 50%+ (6 min → 2–3 min) for datasets with 1.5M+ rows across multiple clients.</li>
-          <li>Built PowerBI dashboards and FastAPI endpoints used by 20+ internal and client stakeholders, reducing reporting delays and enabling data-driven strategy decisions.</li>
-          <li>Reduced support ticket resolution time to &lt;1 day by building scalable SQL workflows for RCA on datasets with 2M+ rows.</li>
-          <li>Led client-facing delivery of a bespoke application, driving £60k contract growth by presenting ROI-focused enhancements and managing the full project lifecycle.</li>
-          <li>Migrated and synchronized operative data across two platforms using APIs, eliminating manual data entry and ensuring cross-system consistency.</li>
-          <li>Improved Azure-deployed data functions via dynamic database logic and automated edge-case handling, removing manual updates and boosting reliability.</li>
-          <li>Mentored a junior analyst through a tailored onboarding plan, increasing team output and strengthening internal analytics capability.</li>
-        </ul>
-      </div>
+        <!-- Ishango -->
+        <div class="timeline-item">
+          <div class="timeline-dot">💼</div>
+          <div class="timeline-card">
+            <p class="timeline-date">Sept 2022 – Present</p>
+            <h3 class="timeline-role">Data Analyst</h3>
+            <p class="timeline-company">Ishango LTD Co · London, UK</p>
+            <ul>
+              <li>Rebuilt Azure-deployed ETL pipelines using DuckDB, Parquet, and Polars, cutting processing time by 50%+ (6 min → 2–3 min) for datasets with 1.5M+ rows across multiple clients.</li>
+              <li>Built PowerBI dashboards and FastAPI endpoints used by 20+ internal and client stakeholders, reducing reporting delays and enabling data-driven strategy decisions.</li>
+              <li>Reduced support ticket resolution time to &lt;1 day by building scalable SQL workflows for RCA on datasets with 2M+ rows.</li>
+              <li>Led client-facing delivery of a bespoke application, driving £60k contract growth by presenting ROI-focused enhancements and managing the full project lifecycle.</li>
+              <li>Migrated and synchronized operative data across two platforms using APIs, eliminating manual data entry and ensuring cross-system consistency.</li>
+              <li>Improved Azure-deployed data functions via dynamic database logic and automated edge-case handling, removing manual updates and boosting reliability.</li>
+              <li>Mentored a junior analyst through a tailored onboarding plan, increasing team output and strengthening internal analytics capability.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span class="lang-tag">DuckDB</span>
+              <span class="lang-tag">Polars</span>
+              <span class="lang-tag">Azure</span>
+              <span class="lang-tag">Power BI</span>
+            </div>
+          </div>
+        </div>
 
-      <div id="fiat" class="experience-content">
-        <h3>Business Analyst / Data Analyst · Fiat 500 Full Electric Project, London, UK (Apr 2022 – Sept 2022)</h3>
-        <ul>
-          <li>Collected 10k+ YouTube comments via API and conducted sentiment analysis using NLP to assess public perception of Fiat 500 electric vs hybrid models.</li>
-          <li>Mapped user influence and engagement networks using Python network analysis libraries to uncover community dynamics and key opinion leaders.</li>
-        </ul>
-      </div>
+        <!-- Fiat 500 project -->
+        <div class="timeline-item">
+          <div class="timeline-dot">💼</div>
+          <div class="timeline-card">
+            <p class="timeline-date">Apr 2022 – Sept 2022</p>
+            <h3 class="timeline-role">Business Analyst / Data Analyst</h3>
+            <p class="timeline-company">Fiat 500 Full Electric Project · London, UK</p>
+            <ul>
+              <li>Collected 10k+ YouTube comments via API and conducted sentiment analysis using NLP to assess public perception of Fiat 500 electric vs hybrid models.</li>
+              <li>Mapped user influence and engagement networks using Python network analysis libraries to uncover community dynamics and key opinion leaders.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span class="lang-tag">NLP</span>
+              <span class="lang-tag">Python</span>
+              <span class="lang-tag">Network Analysis</span>
+            </div>
+          </div>
+        </div>
 
-      <div id="getharley" class="experience-content">
-        <h3>Data Analyst (Part-time) · GetHarley, London, UK (Feb 2022 – Apr 2022)</h3>
-        <ul>
-          <li>Streamlined and automated the monthly reporting process by querying data from three different sources via APIs and building scripts in Python and PostgreSQL, collaborating with the data team on GitHub and saving approximately 15 hours of manual work.</li>
-          <li>Automated the booking appointments process using Google Calendar APIs, building Python scripts and updating them in the team’s GitHub repository.</li>
-          <li>Delivered monthly and quarterly reports by running Python scripts and presenting the most important insights to stakeholders.</li>
-          <li>Co-worked with the data team to update, deploy, and host scripts on Heroku, as well as maintain database pipelines and Google Sheets integrations.</li>
-          <li>Consolidated monthly reports on practitioners and products by querying data in SQL and Python, delivering quantitative and objective analysis to support decision-making.</li>
-        </ul>
-      </div>
+        <!-- GetHarley -->
+        <div class="timeline-item">
+          <div class="timeline-dot">💼</div>
+          <div class="timeline-card">
+            <p class="timeline-date">Feb 2022 – Apr 2022</p>
+            <h3 class="timeline-role">Data Analyst (Part-time)</h3>
+            <p class="timeline-company">GetHarley · London, UK</p>
+            <ul>
+              <li>Streamlined and automated the monthly reporting process by querying data from three different sources via APIs and building scripts in Python and PostgreSQL, collaborating with the data team on GitHub and saving approximately 15 hours of manual work.</li>
+              <li>Automated the booking appointments process using Google Calendar APIs, building Python scripts and updating them in the team’s GitHub repository.</li>
+              <li>Delivered monthly and quarterly reports by running Python scripts and presenting the most important insights to stakeholders.</li>
+              <li>Co-worked with the data team to update, deploy, and host scripts on Heroku, as well as maintain database pipelines and Google Sheets integrations.</li>
+              <li>Consolidated monthly reports on practitioners and products by querying data in SQL and Python, delivering quantitative and objective analysis to support decision-making.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span class="lang-tag">Python</span>
+              <span class="lang-tag">PostgreSQL</span>
+              <span class="lang-tag">APIs</span>
+              <span class="lang-tag">Heroku</span>
+            </div>
+          </div>
+        </div>
 
-      <div id="army" class="experience-content">
-        <h3>Dredger / Minesweeper · Hellenic Army, Athens, Greece (Jul 2020 – Mar 2021)</h3>
-        <ul>
-          <li>Maintained digital records of military vehicle movements using Excel and ensured accurate reporting to command leadership.</li>
-          <li>Led a team of 6 to reorganize and optimize warehouse logistics, improving inventory access and labelling efficiency.</li>
-          <li>Ensured base security through dedicated 6-hour patrols in teams of two, reporting observations every 45 minutes to the Major.</li>
-        </ul>
-      </div>
+        <!-- Hellenic Army -->
+        <div class="timeline-item">
+          <div class="timeline-dot">💼</div>
+          <div class="timeline-card">
+            <p class="timeline-date">Jul 2020 – Mar 2021</p>
+            <h3 class="timeline-role">Dredger / Minesweeper</h3>
+            <p class="timeline-company">Hellenic Army · Athens, Greece</p>
+            <ul>
+              <li>Maintained digital records of military vehicle movements using Excel and ensured accurate reporting to command leadership.</li>
+              <li>Led a team of 6 to reorganize and optimize warehouse logistics, improving inventory access and labelling efficiency.</li>
+              <li>Ensured base security through dedicated 6-hour patrols in teams of two, reporting observations every 45 minutes to the Major.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span class="lang-tag">Leadership</span>
+              <span class="lang-tag">Logistics</span>
+            </div>
+          </div>
+        </div>
 
-      <div id="bank" class="experience-content">
-        <h3>Social Media Coordinator · Bank of Greece, Athens, Greece (Aug 2019 – Mar 2020)</h3>
-        <ul>
-          <li>Mentored and guided two new interns in the department, providing feedback and supporting their growth within the team.</li>
-          <li>Produced daily economic briefings and analytics using Bloomberg/Reuters for senior leadership, including the Governor.</li>
-          <li>Conducted macroeconomic research and synthesized findings into strategic reports to inform policy decisions.</li>
-          <li>Monitored and tracked global economies, collected and analyzed data, and delivered daily reports to support informed decision-making.</li>
-        </ul>
+        <!-- Bank of Greece -->
+        <div class="timeline-item">
+          <div class="timeline-dot">💼</div>
+          <div class="timeline-card">
+            <p class="timeline-date">Aug 2019 – Mar 2020</p>
+            <h3 class="timeline-role">Social Media Coordinator</h3>
+            <p class="timeline-company">Bank of Greece · Athens, Greece</p>
+            <ul>
+              <li>Mentored and guided two new interns in the department, providing feedback and supporting their growth within the team.</li>
+              <li>Produced daily economic briefings and analytics using Bloomberg/Reuters for senior leadership, including the Governor.</li>
+              <li>Conducted macroeconomic research and synthesized findings into strategic reports to inform policy decisions.</li>
+              <li>Monitored and tracked global economies, collected and analyzed data, and delivered daily reports to support informed decision-making.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span class="lang-tag">Macroeconomics</span>
+              <span class="lang-tag">Analytics</span>
+              <span class="lang-tag">Bloomberg</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   </main>

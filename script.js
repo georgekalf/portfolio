@@ -6,7 +6,7 @@ const themeToggle = document.querySelector('.theme-toggle');
 
 function applyTheme(theme) {
   document.body.setAttribute('data-theme', theme);
-  // When dark, show ☀️ to indicate switching to light; when light, show 🌙
+  // When dark, show ☀️ to indicate switch to light; when light, show 🌙
   if (themeToggle) {
     themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
   }
@@ -27,7 +27,7 @@ function applyTheme(theme) {
 })();
 
 // =====================================
-// EXPERIENCE TABS (experience.html)
+// (Old) Experience tabs – safe no-op now
 // =====================================
 const expTabs = document.querySelectorAll('.tab-btn');
 const expContents = document.querySelectorAll('.experience-content');
@@ -99,10 +99,8 @@ async function loadProjects() {
         r.name.toLowerCase() !== 'georgekalf.github.io'
     );
 
-    // Limit to a reasonable number to avoid spamming GitHub API
     const limited = repos.slice(0, 12);
 
-    // Enrich with README image
     const projects = await Promise.all(
       limited.map(async repo => {
         let languages;
@@ -125,7 +123,6 @@ async function loadProjects() {
             const match = markdown.match(/!\[[^\]]*\]\((.*?)\)/);
             if (match && match[1]) {
               let imgPath = match[1].trim();
-
               imgPath = imgPath.replace(/^</, '').replace(/>$/, '');
 
               if (
@@ -208,6 +205,7 @@ function renderProjects(filter = 'all') {
 
 function setupProjectFilters() {
   if (!filterControls) return;
+  if (!projectsData.length) return;
 
   const allLanguages = [...new Set(projectsData.flatMap(p => p.languages))];
 
