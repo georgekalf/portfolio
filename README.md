@@ -4,7 +4,6 @@ Welcome to my personal portfolio website.
 This repo hosts the code for my multi-page data & AI portfolio, built with HTML, CSS and vanilla JavaScript.
 
 🌐 **Live site:** https://georgekalf.github.io/portofolio/  
-*(If I rename the repo, this URL will change accordingly.)*
 
 ---
 
@@ -20,9 +19,9 @@ This repo hosts the code for my multi-page data & AI portfolio, built with HTML,
 
 ## Tech Stack
 
-- **HTML5** – structure and content  
-- **CSS3** – custom styling, layout and animations  
-- **JavaScript (ES6)** – theme toggle, dynamic projects, small UI interactions  
+- **HTML** – structure and content  
+- **CSS** – custom styling, layout and animations  
+- **JavaScript** – theme toggle, dynamic projects, small UI interactions  
 - **GitHub Pages** – static hosting
 
 ---
@@ -40,7 +39,7 @@ root
 ├── assets/
 │   ├── css/
 │   │   └── style.css   # Main stylesheet
-│   ├── images/         # Profile / static images (if any)
+│   ├── images/         # Profile / static images
 │   └── js/
 │       └── script.js   # Theme + dynamic projects logic
 └── README.md
