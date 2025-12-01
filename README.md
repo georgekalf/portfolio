@@ -39,7 +39,7 @@ root
 ├── assets/
 │   ├── css/
 │   │   └── style.css   # Main stylesheet
-│   ├── images/         # Profile / static images (if any)
+│   ├── images/         # Profile / static images
 │   └── js/
 │       └── script.js   # Theme + dynamic projects logic
 └── README.md
