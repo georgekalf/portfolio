@@ -4,7 +4,6 @@ Welcome to my personal portfolio website.
 This repo hosts the code for my multi-page data & AI portfolio, built with HTML, CSS and vanilla JavaScript.
 
 🌐 **Live site:** https://georgekalf.github.io/portofolio/  
-*(If I rename the repo, this URL will change accordingly.)*
 
 ---
 
