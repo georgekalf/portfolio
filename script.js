@@ -290,12 +290,12 @@ document.addEventListener('DOMContentLoaded', function () {
       if (lower.indexOf('web') !== -1 && lower.indexOf('scrap') !== -1) {
         p.friendly_title = 'Web Scraping Projects (NBA & Aldi Jobs)';
         p.description =
-          'Web scraping projects including NBA defensive analysis and Aldi job postings intelligence. Uses Python and APIs to collect, clean and analyse data for actionable recommendations.';
+          'Web scraping pipelines for NBA defensive analytics and Aldi job postings, from data collection to cleaning, feature engineering and exploratory analysis.';
         p.languages = ['Python', 'Web Scraping', 'APIs'];
         p.categories = ['Data Analysis'];
-        if (!p.image_url) {
-          p.image_url = contextImages.scraping;
-        }
+        // Always use the specific image from the repo (overrides README image)
+        p.image_url =
+          'https://raw.githubusercontent.com/georgekalf/web-scraping/main/web-scraping.jpeg';
       }
 
       // Data Management MongoDB
