@@ -172,7 +172,9 @@ document.addEventListener('DOMContentLoaded', function () {
         return (
           !repo.fork &&
           name !== 'georgekalf' &&
-          name !== 'georgekalf.github.io'
+          name !== 'georgekalf.github.io' &&
+          name !== 'portfolio' &&
+          name !== 'portfolio-website'
         );
       });
 
@@ -285,6 +287,29 @@ document.addEventListener('DOMContentLoaded', function () {
           p.image_url = contextImages.hotel;
         }
       }
+
+      // Fiat 500 NLP & Network Analysis
+      if (lower.indexOf('fiat') !== -1 && lower.indexOf('nlp') !== -1) {
+        p.friendly_title = 'Fiat 500 EV – NLP Sentiment & Network Analysis';
+        p.description =
+          'NLP-driven sentiment analysis and network analytics on 10k+ YouTube comments to assess public perception of the Fiat 500 electric model. Explores community structure, influencer dynamics and engagement patterns using graph-based methods.';
+        p.languages = ['Python', 'NLP', 'Network Analysis', 'APIs'];
+        p.categories = ['Machine Learning', 'Data Analysis'];
+        p.image_url =
+          'https://raw.githubusercontent.com/georgekalf/Fiat-500-NLP-NetworkAnalysis/main/electric_cars.jpeg';
+      }
+
+      // Ishango Data Engineering Challenge
+      if (lower.indexOf('ishango') !== -1 && lower.indexOf('challenge') !== -1) {
+        p.friendly_title = 'Ishango Data Engineering Challenge';
+        p.description =
+          'Bigfoot Sightings Analysis: EDA, NLP & Semantic Classification.';
+        p.languages = ['Python', 'SQL', 'Data Engineering'];
+        p.categories = ['Data Analysis'];
+        p.image_url =
+          'https://raw.githubusercontent.com/georgekalf/ishango-challenge/main/images/big_foot.jpg';
+      }
+
 
       // Web Scraping Projects
       if (lower.indexOf('web') !== -1 && lower.indexOf('scrap') !== -1) {
