@@ -142,138 +142,122 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   async function loadProjects() {
-    if (!projectsGrid) return;
+  if (!projectsGrid) return;
 
-    try {
-      var controller = new AbortController();
-      var timeoutId = setTimeout(function () {
-        controller.abort();
-      }, 10000);
+  try {
+    var controller = new AbortController();
+    var timeoutId = setTimeout(() => controller.abort(), 10000);
 
-      // Fetch personal repos
-      var userResponse = await fetch(
-        'https://api.github.com/users/georgekalf/repos?per_page=100',
-        {
-          signal: controller.signal,
-          headers: { Accept: 'application/vnd.github+json' }
-        }
-      );
+    // ---------------------------
+    // Fetch personal repos
+    // ---------------------------
+    const userUrl = 'https://api.github.com/users/georgekalf/repos?per_page=100';
+    let userResponse = await fetch(userUrl, {
+      signal: controller.signal,
+      headers: { Accept: 'application/vnd.github+json' }
+    });
 
-      if (!userResponse.ok) {
-        throw new Error('GitHub user repos error: ' + userResponse.status);
-      }
+    if (!userResponse.ok) {
+      throw new Error('GitHub user repos error: ' + userResponse.status);
+    }
+    let repos = await userResponse.json();
 
-      var repos = await userResponse.json();
+    // ---------------------------
+    // Fetch organization repos
+    // ---------------------------
+    const orgUrl = 'https://api.github.com/orgs/imdb-helpful-reviews-detection-nlp/repos';
+    let orgResponse = await fetch(orgUrl, {
+      signal: controller.signal,
+      headers: { Accept: 'application/vnd.github+json' }
+    });
 
-      // Fetch organisation repos (IMDB MSc project)
-      var orgResponse = await fetch(
-        'https://api.github.com/orgs/Imdb-helpful-reviews-detection-NLP/repos',
-        {
-          headers: { Accept: 'application/vnd.github+json' }
-        }
-      )
-
-      if (orgResponse.ok) {
-        var orgRepos = await orgResponse.json();
-        repos = repos.concat(orgRepos);
-      }
-
-      // De-duplicate in case of overlap
-      repos = repos.filter(
-        (repo, index, self) =>
-          index === self.findIndex(r => r.full_name === repo.full_name)
-      )
-
-      // Filter out forks & profile/portfolio repos
-      repos = repos.filter(function (repo) {
-        var name = repo.name.toLowerCase();
-        return (
-          !repo.fork &&
-          name !== 'georgekalf' &&
-          name !== 'georgekalf.github.io' &&
-          name !== 'portfolio' &&
-          name !== 'portfolio-website'
-        );
-      });
-
-      var limited = repos.slice(0, 30);
-
-      var projects = [];
-      for (var i = 0; i < limited.length; i++) {
-        var repo = limited[i];
-
-        var languages;
-        if (Array.isArray(repo.topics) && repo.topics.length) {
-          languages = repo.topics.slice();
-        } else if (repo.language) {
-          languages = [repo.language];
-        } else {
-          languages = ['Project'];
-        }
-
-        var imageUrl = null;
-        var readmeSummary = null;
-
-        try {
-          var readmeRes = await fetch(
-            'https://api.github.com/repos/georgekalf/' +
-              repo.name +
-              '/readme',
-            { headers: { Accept: 'application/vnd.github.v3.raw' } }
-          );
-
-          if (readmeRes.ok) {
-            var markdown = await readmeRes.text();
-
-            // Image from README
-            var imgMatch = markdown.match(/!\[[^\]]*]\((.*?)\)/);
-            if (imgMatch && imgMatch[1]) {
-              var imgPath = normaliseGithubImageUrl(imgMatch[1]);
-              if (imgPath.indexOf('http') === 0) {
-                imageUrl = imgPath;
-              } else {
-                var branch = repo.default_branch || 'main';
-                var cleaned = imgPath.replace(/^\.?\//, '');
-                imageUrl =
-                  'https://raw.githubusercontent.com/georgekalf/' +
-                  repo.name +
-                  '/' +
-                  branch +
-                  '/' +
-                  cleaned;
-              }
-            }
-
-            // Text summary from README
-            readmeSummary = extractReadmeSummary(markdown);
-          }
-        } catch (err) {
-          console.warn('Failed to parse README for ' + repo.name + ':', err.message);
-        }
-
-        projects.push({
-          name: repo.name,
-          description: repo.description || null,
-          readmeSummary: readmeSummary || null,
-          html_url: repo.html_url,
-          languages: languages,
-          image_url: imageUrl || null,
-          friendly_title: null,
-          // default category for anything not manually overridden
-          categories: ['Data Analysis']
-        });
-      }
-
-      projectsData = projects;
-      applyProjectOverrides();
-    } catch (error) {
-      console.warn('GitHub API failed, using fallback projects:', error.message);
-      projectsData = fallbackProjects;
+    if (orgResponse.ok) {
+      const orgRepos = await orgResponse.json();
+      repos = repos.concat(orgRepos);
     }
 
-    renderProjects('all');
-    setupProjectFilters();
+    // De-duplicate
+    repos = repos.filter((repo, index, self) =>
+      index === self.findIndex(r => r.full_name === repo.full_name)
+    );
+
+    // Filter forks & portfolio repos
+    repos = repos.filter(repo => {
+      const name = repo.name.toLowerCase();
+      return (
+        !repo.fork &&
+        name !== 'georgekalf' &&
+        name !== 'georgekalf.github.io' &&
+        name !== 'portfolio' &&
+        name !== 'portfolio-website'
+      );
+    });
+
+    // Limit to first 30
+    const limited = repos.slice(0, 30);
+
+    // ---------------------------
+    // Fetch READMEs in parallel
+    // ---------------------------
+    const projects = await Promise.all(limited.map(async repo => {
+      let imageUrl = null;
+      let readmeSummary = null;
+
+      try {
+        const readmeRes = await fetch(
+          'https://api.github.com/repos/' + repo.full_name + '/readme',
+          { headers: { Accept: 'application/vnd.github.v3.raw' } }
+        );
+        if (readmeRes.ok) {
+          const markdown = await readmeRes.text();
+
+          // Image from README
+          const imgMatch = markdown.match(/!\[[^\]]*]\((.*?)\)/);
+          if (imgMatch && imgMatch[1]) {
+            let imgPath = normaliseGithubImageUrl(imgMatch[1]);
+            if (!imgPath.startsWith('http')) {
+              const branch = repo.default_branch || 'main';
+              imgPath = 'https://raw.githubusercontent.com/' + repo.full_name + '/' + branch + '/' + imgPath.replace(/^\.?\//, '');
+            }
+            imageUrl = imgPath;
+          }
+
+          // Text summary from README
+          readmeSummary = extractReadmeSummary(markdown);
+        }
+      } catch (err) {
+        console.warn('Failed to parse README for ' + repo.name + ':', err.message);
+      }
+
+      const languages = Array.isArray(repo.topics) && repo.topics.length
+        ? repo.topics.slice()
+        : repo.language
+        ? [repo.language]
+        : ['Project'];
+
+      return {
+        name: repo.name,
+        description: repo.description || null,
+        readmeSummary: readmeSummary || null,
+        html_url: repo.html_url,
+        languages: languages,
+        image_url: imageUrl || null,
+        friendly_title: null,
+        categories: ['Data Analysis']
+      };
+    }));
+
+    clearTimeout(timeoutId);
+    projectsData = projects;
+    applyProjectOverrides();
+  } catch (error) {
+    console.warn('GitHub API failed, using fallback projects:', error.message);
+    projectsData = fallbackProjects;
   }
+
+  renderProjects('all');
+  setupProjectFilters();
+}
 
   // Apply custom titles/descriptions/images/categories for key repos
   function applyProjectOverrides() {
@@ -324,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'NLP-driven sentiment analysis and network analytics on 10k+ YouTube comments to assess public perception of the Fiat 500 electric model. Explores community structure, influencer dynamics and engagement patterns using graph-based methods.';
         p.languages = ['Python', 'NLP', 'Network Analysis', 'APIs'];
-        p.categories = ['Machine Learning', 'Data Analysis', 'NLP'];
+        p.categories = ['NLP'];
         p.image_url =
           'https://raw.githubusercontent.com/georgekalf/Fiat-500-NLP-NetworkAnalysis/main/electric_cars.jpeg';
       }
@@ -407,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'Network analysis of security traders’ knowledge-sharing relationships and attitudes toward AI on a trading floor, using graph metrics and positional data.';
         p.languages = ['Python', 'NetworkX', 'Graph Analytics'];
-        p.categories = ['Data Analysis', 'Machine Learning'];
+        p.categories = ['Data Analysis'];
         if (!p.image_url) {
           p.image_url = contextImages.network;
         }
@@ -581,5 +565,4 @@ document.addEventListener('DOMContentLoaded', function () {
   // Only run project logic on the Projects page
   if (projectsGrid) {
     loadProjects();
-  }
-});
+  }})
