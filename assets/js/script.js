@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initTheme();
 
   // =========================
-  // EXPERIENCE TABS (if used)
+  // EXPERIENCE TABS
   // =========================
   var expTabs = document.querySelectorAll('.tab-btn');
   var expContents = document.querySelectorAll('.experience-content');
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       return clean;
     }
-    return clean; // relative; handled later when we know repo/branch
+    return clean; // relative; handled later when know the repo/branch
   }
 
   async function loadProjects() {
@@ -150,7 +150,8 @@ document.addEventListener('DOMContentLoaded', function () {
         controller.abort();
       }, 10000);
 
-      var response = await fetch(
+      // Fetch personal repos
+      var userResponse = await fetch(
         'https://api.github.com/users/georgekalf/repos?per_page=100',
         {
           signal: controller.signal,
@@ -158,13 +159,30 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       );
 
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        throw new Error('GitHub API error: ' + response.status);
+      if (!userResponse.ok) {
+        throw new Error('GitHub user repos error: ' + userResponse.status);
       }
 
-      var repos = await response.json();
+      var repos = await userResponse.json();
+
+      // Fetch organisation repos (IMDB MSc project)
+      var orgResponse = await fetch(
+        'https://api.github.com/orgs/Imdb-helpful-reviews-detection-NLP/repos',
+        {
+          headers: { Accept: 'application/vnd.github+json' }
+        }
+      )
+
+      if (orgResponse.ok) {
+        var orgRepos = await orgResponse.json();
+        repos = repos.concat(orgRepos);
+      }
+
+      // De-duplicate in case of overlap
+      repos = repos.filter(
+        (repo, index, self) =>
+          index === self.findIndex(r => r.full_name === repo.full_name)
+      )
 
       // Filter out forks & profile/portfolio repos
       repos = repos.filter(function (repo) {
@@ -288,13 +306,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
 
+      // IMDB Helpful reviews detection NLP
+      if (lower.indexOf('imdb') !== -1) {
+        p.friendly_title = 'IMDB Helpful Reviews Detection (NLP)';
+        p.description =
+          'Applying NLP techniques to detect helpful reviews on IMDB using text preprocessing, feature engineering and supervised learning models.';
+        p.languages = ['Python', 'NLP', 'Machine Learning'];
+        p.categories = ['Machine Learning', 'NLP'];
+        p.image_url =
+        'https://raw.githubusercontent.com/Imdb-helpful-reviews-detection-NLP/Detection-of-helpful-reviews-on-IMDB-/main/IMDBs.jpg';
+      }
+
+
       // Fiat 500 NLP & Network Analysis
       if (lower.indexOf('fiat') !== -1 && lower.indexOf('nlp') !== -1) {
         p.friendly_title = 'Fiat 500 EV – NLP Sentiment & Network Analysis';
         p.description =
           'NLP-driven sentiment analysis and network analytics on 10k+ YouTube comments to assess public perception of the Fiat 500 electric model. Explores community structure, influencer dynamics and engagement patterns using graph-based methods.';
         p.languages = ['Python', 'NLP', 'Network Analysis', 'APIs'];
-        p.categories = ['Machine Learning', 'Data Analysis'];
+        p.categories = ['Machine Learning', 'Data Analysis', 'NLP'];
         p.image_url =
           'https://raw.githubusercontent.com/georgekalf/Fiat-500-NLP-NetworkAnalysis/main/electric_cars.jpeg';
       }
@@ -305,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function () {
         p.description =
           'Bigfoot Sightings Analysis: EDA, NLP & Semantic Classification.';
         p.languages = ['Python', 'SQL', 'Data Engineering'];
-        p.categories = ['Data Analysis'];
+        p.categories = ['Data Analysis', 'NLP'];
         p.image_url =
           'https://raw.githubusercontent.com/georgekalf/ishango-challenge/main/images/big_foot.jpg';
       }
@@ -517,6 +547,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var preferredOrder = [
       'Machine Learning',
       'Deep Learning',
+      'NLP',
       'Data Analysis',
       'Finance',
       'Web Development'
