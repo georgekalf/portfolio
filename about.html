@@ -4,6 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About - Georgios Kalfas</title>
+  <meta name="description" content="About Georgios Kalfas – Data Analytics Engineer working across data engineering, analytics and applied ML/AI." />
+  <meta name="theme-color" content="#6366f1" />
+
+  <!-- Open Graph / LinkedIn preview -->
+  <meta property="og:title" content="About – Georgios Kalfas" />
+  <meta property="og:description" content="Data Analytics Engineer working across data engineering, analytics and applied ML/AI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://georgekalf.github.io/portfolio/about.html" />
+  <meta property="og:image" content="https://georgekalf.github.io/portfolio/assets/images/profile.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/favicon.ico" />
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <!-- CSS from assets/css -->
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
@@ -14,12 +32,12 @@
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="experience.html" class="nav-link">💼 Experience</a></li>
-        <li><a href="projects.html" class="nav-link">👩🏻‍💻💻 Projects</a></li>
+        <li><a href="projects.html" class="nav-link">💻 Projects</a></li>
         <li><a href="education.html" class="nav-link">🎓 Education</a></li>
         <li><a href="about.html" class="nav-link active">👤 About</a></li>
         <li><a href="contact.html" class="nav-link">✉️ Contact</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+      <button class="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </nav>
 
@@ -27,52 +45,73 @@
     <section class="section about-section active">
       <h1 class="page-title">Who is George?</h1>
 
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-number">3+</div>
+          <div class="stat-label">Years in Data Engineering</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3.5M+</div>
+          <div class="stat-label">Row Pipelines Built</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">£80k</div>
+          <div class="stat-label">Contract Growth Driven</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Stakeholders Served via BI</div>
+        </div>
+      </div>
+
       <div class="about-box">
-        <p>
-          I’m a data analytics engineer focused on building end-to-end data products: from ingestion and
-          transformation, through modelling and analysis, to clear outputs that teams can actually use.
-          I enjoy working at the intersection of data engineering, data science and analytics, where the goal
-          is not just to build something clever, but to deliver something reliable and measurable.
-        </p>
+        <div class="about-text">
+          <p>
+            I'm a data analytics engineer focused on building end-to-end data products: from ingestion and
+            transformation, through modelling and analysis, to clear outputs that teams can actually use.
+            I enjoy working at the intersection of data engineering, data science and analytics, where the goal
+            is not just to build something clever, but to deliver something reliable and measurable.
+          </p>
 
-        <p>
-          In my current role at Ishango I work with multi-million row datasets across several clients, rebuilding
-          and optimising ETL pipelines using tools such as SQLAlchemy, Pydantic, DuckDB, & Parquet files, and deploying them on Azure.
-          I design and maintain Azure Functions and database logic that keep data flows robust and performant,
-          and I integrate external systems via APIs to keep operational data in sync and reduce manual work.
-        </p>
+          <p>
+            In my current role at Ishango I work with multi-million row datasets across several clients, rebuilding
+            and optimising ETL pipelines using tools such as SQLAlchemy, Pydantic, DuckDB, &amp; Parquet files, and deploying them on Azure.
+            I design and maintain Azure Functions and database logic that keep data flows robust and performant,
+            and I integrate external systems via APIs to keep operational data in sync and reduce manual work.
+          </p>
 
-        <p>
-          On the analytics and BI side, I build Power BI dashboards and reporting layers that support day-to-day
-          decision making for internal teams and clients. I expose analytical logic through FastAPI endpoints and
-          SQL workflows, so that insights and metrics can be reused across applications instead of being locked
-          into a single report. I’m comfortable owning the full lifecycle of these solutions: scoping the problem,
-          designing the data model, implementing, testing and iterating based on feedback.
-        </p>
+          <p>
+            On the analytics and BI side, I build Power BI dashboards and reporting layers that support day-to-day
+            decision making for internal teams and clients. I expose analytical logic through FastAPI endpoints and
+            SQL workflows, so that insights and metrics can be reused across applications instead of being locked
+            into a single report. I'm comfortable owning the full lifecycle of these solutions: scoping the problem,
+            designing the data model, implementing, testing and iterating based on feedback.
+          </p>
 
-        <p>
-          My technical toolkit includes Python (pandas, NumPy, scikit-learn, TensorFlow, PyTorch, Matplotlib,
-          NLTK, spaCy, Selenium, BeautifulSoup, SQLAlchemy, Pydantic, FastAPI), SQL (PostgreSQL, MySQL), R and SPSS, as well as version control,
-          data visualisation libraries (Seaborn, Plotly, Matplotlib) and modern cloud tooling (Microsoft Azure). I have experience working with APIs, scheduling
-          and automation, and I care a lot about making pipelines observable and maintainable rather than just
-          “working once”.
-        </p>
+          <p>
+            My technical toolkit includes Python (pandas, NumPy, scikit-learn, TensorFlow, PyTorch, Matplotlib,
+            NLTK, spaCy, Selenium, BeautifulSoup, SQLAlchemy, Pydantic, FastAPI), SQL (PostgreSQL, MySQL), R and SPSS, as well as version control,
+            data visualisation libraries (Seaborn, Plotly, Matplotlib) and modern cloud tooling (Microsoft Azure). I have experience working with APIs, scheduling
+            and automation, and I care a lot about making pipelines observable and maintainable rather than just
+            "working once".
+          </p>
 
-        <p>
-          Beyond pure engineering, I’ve worked on a range of machine learning and analytics projects: time-series
-          forecasting for wind turbine health, autoencoder-based fraud detection, hotel booking cancellation
-          prediction and guest segmentation, customer RFM analysis, an ML-driven R Shiny app for drug
-          classification, and network analytics to study how AI knowledge spreads on a trading floor. These projects
-          span classic supervised learning, unsupervised clustering, deep learning and NLP, and they all share the
-          same goal of turning complex data into practical insights.
-        </p>
+          <p>
+            Beyond pure engineering, I've worked on a range of machine learning and analytics projects: time-series
+            forecasting for wind turbine health, autoencoder-based fraud detection, hotel booking cancellation
+            prediction and guest segmentation, customer RFM analysis, an ML-driven R Shiny app for drug
+            classification, and network analytics to study how AI knowledge spreads on a trading floor. These projects
+            span classic supervised learning, unsupervised clustering, deep learning and NLP, and they all share the
+            same goal of turning complex data into practical insights.
+          </p>
 
-        <p>
-          I enjoy collaborating with product, business and technical stakeholders, translating questions into
-          well-defined analytical problems and then into concrete solutions. Whether that means re-architecting
-          a pipeline, designing a model or mentoring a junior analyst, I try to keep the focus on clarity,
-          reliability and long-term impact rather than quick wins only.
-        </p>
+          <p>
+            I enjoy collaborating with product, business and technical stakeholders, translating questions into
+            well-defined analytical problems and then into concrete solutions. Whether that means re-architecting
+            a pipeline, designing a model or mentoring a junior analyst, I try to keep the focus on clarity,
+            reliability and long-term impact rather than quick wins only.
+          </p>
+        </div>
       </div>
     </section>
   </main>

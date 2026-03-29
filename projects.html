@@ -4,6 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects - Georgios Kalfas</title>
+  <meta name="description" content="Data engineering, ML and analytics projects by Georgios Kalfas – loaded dynamically from GitHub." />
+  <meta name="theme-color" content="#6366f1" />
+
+  <!-- Open Graph / LinkedIn preview -->
+  <meta property="og:title" content="Projects – Georgios Kalfas" />
+  <meta property="og:description" content="Data engineering, ML and analytics projects by Georgios Kalfas." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://georgekalf.github.io/portfolio/projects.html" />
+  <meta property="og:image" content="https://georgekalf.github.io/portfolio/assets/images/profile.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/favicon.ico" />
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body data-theme="dark">
@@ -13,12 +31,12 @@
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="experience.html" class="nav-link">💼 Experience</a></li>
-        <li><a href="projects.html" class="nav-link active">👩🏻‍💻💻 Projects</a></li>
+        <li><a href="projects.html" class="nav-link active">💻 Projects</a></li>
         <li><a href="education.html" class="nav-link">🎓 Education</a></li>
         <li><a href="about.html" class="nav-link">👤 About</a></li>
         <li><a href="contact.html" class="nav-link">✉️ Contact</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+      <button class="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </nav>
 
@@ -28,14 +46,56 @@
 
       <div class="filter-controls">
         <!-- Buttons are created / updated by script.js based on categories -->
-        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <!-- aria-pressed="true" on the default active button for screen reader accessibility -->
+        <button class="filter-btn active" data-filter="all" aria-pressed="true">All Projects</button>
       </div>
 
       <div id="projects-grid" class="projects-grid">
-        <!-- Dynamic projects from GitHub are injected here by script.js -->
-        <div class="loading">
-          <div class="spinner"></div>
-          <p>Loading projects...</p>
+        <!-- Skeleton shimmer cards shown while GitHub API loads.
+             script.js replaces these with real project cards on load. -->
+        <div class="skeleton-card">
+          <div class="skeleton-thumb"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line full"></div>
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-tags">
+            <div class="skeleton-tag"></div>
+            <div class="skeleton-tag"></div>
+            <div class="skeleton-tag"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumb"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line full"></div>
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-tags">
+            <div class="skeleton-tag"></div>
+            <div class="skeleton-tag"></div>
+            <div class="skeleton-tag"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumb"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line full"></div>
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-tags">
+            <div class="skeleton-tag"></div>
+            <div class="skeleton-tag"></div>
+            <div class="skeleton-tag"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumb"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line full"></div>
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-tags">
+            <div class="skeleton-tag"></div>
+            <div class="skeleton-tag"></div>
+            <div class="skeleton-tag"></div>
+          </div>
         </div>
       </div>
     </section>

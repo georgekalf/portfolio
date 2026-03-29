@@ -4,8 +4,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Georgios Kalfas - Data Analytics Engineer</title>
+  <meta name="description" content="Georgios Kalfas – Data Analytics Engineer specialising in data engineering, analytics and applied ML/AI. Portfolio of end-to-end data products, pipelines and dashboards." />
+  <meta name="theme-color" content="#6366f1" />
+
+  <!-- Open Graph / LinkedIn preview -->
+  <meta property="og:title" content="Georgios Kalfas – Data Analytics Engineer" />
+  <meta property="og:description" content="Data engineering, analytics and applied ML/AI. Portfolio of end-to-end data products, pipelines and dashboards." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://georgekalf.github.io/portfolio/" />
+  <meta property="og:image" content="https://georgekalf.github.io/portfolio/assets/images/profile.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/favicon.ico" />
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <!-- CSS now loaded from assets/css -->
   <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- JSON-LD structured data — helps Google understand who this page is about -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Georgios Kalfas",
+    "jobTitle": "Data Analytics Engineer",
+    "url": "https://georgekalf.github.io/portfolio/",
+    "sameAs": [
+      "https://www.linkedin.com/in/georgios-kalfas/",
+      "https://github.com/georgekalf"
+    ]
+  }
+  </script>
 </head>
 <body data-theme="dark">
   <nav class="navbar">
@@ -14,12 +49,12 @@
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link active">Home</a></li>
         <li><a href="experience.html" class="nav-link">💼 Experience</a></li>
-        <li><a href="projects.html" class="nav-link">👩🏻‍💻💻 Projects</a></li>
+        <li><a href="projects.html" class="nav-link">💻 Projects</a></li>
         <li><a href="education.html" class="nav-link">🎓 Education</a></li>
         <li><a href="about.html" class="nav-link">👤 About</a></li>
         <li><a href="contact.html" class="nav-link">✉️ Contact</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+      <button class="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </nav>
 
@@ -29,8 +64,9 @@
         <!-- Profile column -->
         <div class="profile-column">
           <div class="profile-container">
-            <!-- Image now points to assets/images -->
-            <img src="assets/images/profile.jpg" alt="Georgios Kalfas" class="profile-pic" />
+            <!-- Image now points to assets/images — explicit width/height prevent layout shift -->
+            <img src="assets/images/profile.jpg" alt="Georgios Kalfas"
+                 class="profile-pic" width="210" height="210" />
           </div>
         </div>
 
@@ -38,15 +74,15 @@
         <div class="about-column">
           <h1>Hello, I'm Georgios</h1>
           <p class="subtitle">
-            I’m a data analytics engineer and full-stack data practitioner, working across data engineering,
-            analytics and applied AI to build end-to-end solutions that actually ship. 💻📊🤖
+            Data Analytics Engineer and full-stack data practitioner, building end-to-end solutions
+            across data engineering, analytics and applied AI that actually ship. 💻📊🤖
           </p>
 
           <div class="about-box">
             <p>
               I design and maintain data pipelines, build analytical models and ML systems, and create clear
               dashboards and reports that help teams make decisions. My day-to-day tools include Python,
-              SQL and modern data tooling, from APIs to cloud services.
+              SQL and modern data tooling — from APIs to cloud services.
             </p>
           </div>
 
@@ -54,11 +90,142 @@
             <a href="https://drive.google.com/file/d/1Fd8qLbQEqm_M9E4voItUWIkr2cQcf1Kw/view?usp=sharing"
                class="btn btn-primary"
                target="_blank"
-               rel="noopener">
+               rel="noopener noreferrer">
               View Resume
             </a>
+            <a href="projects.html" class="btn btn-secondary">See My Work</a>
+          </div>
+
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/georgios-kalfas/" target="_blank" rel="noopener noreferrer" class="social-link">💼 LinkedIn</a>
+            <a href="https://github.com/georgekalf" target="_blank" rel="noopener noreferrer" class="social-link">💻 GitHub</a>
+            <a href="mailto:george.kalfas@hotmail.com" class="social-link">✉️ Email</a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section class="section skills-section">
+      <h2>Tech Stack</h2>
+      <div class="skills-grid">
+
+        <!-- Languages -->
+        <div class="skill-category">
+          <h4>Languages</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">R</span>
+          </div>
+        </div>
+
+        <!-- Data Engineering — Git included as core engineering workflow tool -->
+        <div class="skill-category">
+          <h4>Data Engineering</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">DuckDB</span>
+            <span class="skill-tag">Polars</span>
+            <span class="skill-tag">SQLAlchemy</span>
+            <span class="skill-tag">Pydantic</span>
+            <span class="skill-tag">Parquet</span>
+            <span class="skill-tag">PySpark</span>
+            <span class="skill-tag">Git</span>
+          </div>
+        </div>
+
+        <!-- Databases -->
+        <div class="skill-category">
+          <h4>Databases</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">MongoDB</span>
+          </div>
+        </div>
+
+        <!-- Cloud & APIs -->
+        <div class="skill-category">
+          <h4>Cloud &amp; APIs</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Azure</span>
+            <span class="skill-tag">Azure Functions</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">Heroku</span>
+          </div>
+        </div>
+
+        <!-- Machine Learning — scikit-learn as the umbrella library; statsmodels added for
+             statistical depth (OLS, formula API); algorithm families show technique breadth -->
+        <div class="skill-category">
+          <h4>Machine Learning</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">scikit-learn</span>
+            <span class="skill-tag">XGBoost</span>
+            <span class="skill-tag">statsmodels</span>
+            <span class="skill-tag">pandas</span>
+            <span class="skill-tag">NumPy</span>
+            <span class="skill-tag">Random Forest</span>
+            <span class="skill-tag">Logistic Regression</span>
+            <span class="skill-tag">Linear Regression</span>
+            <span class="skill-tag">SVM</span>
+            <span class="skill-tag">KNN</span>
+            <span class="skill-tag">Naive Bayes</span>
+          </div>
+        </div>
+
+        <!-- Deep Learning — LSTM and GRU listed explicitly as they are specific architectures
+             implemented across multiple projects, not just implied by TensorFlow/Keras -->
+        <div class="skill-category">
+          <h4>Deep Learning</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">PyTorch</span>
+            <span class="skill-tag">Keras</span>
+            <span class="skill-tag">LSTM</span>
+            <span class="skill-tag">GRU</span>
+            <span class="skill-tag">CNN</span>
+          </div>
+        </div>
+
+        <!-- NLP — SentenceTransformer added: semantic embeddings library, highly relevant
+             for modern AI/NLP roles; goes beyond bag-of-words approaches.
+             Fixed: "Processing" not "Programming" -->
+        <div class="skill-category">
+          <h4>Natural Language Processing (NLP)</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">spaCy</span>
+            <span class="skill-tag">NLTK</span>
+            <span class="skill-tag">SentenceTransformer</span>
+          </div>
+        </div>
+
+        <!-- Visualisation & BI — Plotly and Seaborn restored here alongside Power BI;
+             a single-item card looks unfinished and these are core viz tools -->
+        <div class="skill-category">
+          <h4>Visualisation &amp; BI</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Power BI</span>
+            <span class="skill-tag">Plotly</span>
+            <span class="skill-tag">Seaborn</span>
+          </div>
+        </div>
+
+        <!-- Libraries — general-purpose Python libs used across multiple projects;
+             requests added as it is used in all web scraping and API integration work;
+             Matplotlib here as a raw plotting library distinct from BI/interactive tools -->
+        <div class="skill-category">
+          <h4>Libraries</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Matplotlib</span>
+            <span class="skill-tag">requests</span>
+            <span class="skill-tag">Selenium</span>
+            <span class="skill-tag">BeautifulSoup</span>
+            <span class="skill-tag">NetworkX</span>
+          </div>
+        </div>
+
       </div>
     </section>
   </main>
