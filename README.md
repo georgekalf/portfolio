@@ -36,6 +36,7 @@ root
 ├── education.html      # Education history
 ├── about.html          # Longer "About me"
 ├── contact.html        # Contact form & links
+├── 404.html            
 ├── assets/
 │   ├── css/
 │   │   └── style.css   # Main stylesheet
