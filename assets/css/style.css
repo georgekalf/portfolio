@@ -1,59 +1,126 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Fonts: Inter for body, Space Grotesk for headings (futuristic display face) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+/* =========================================================
+   COLOR SYSTEM
+   Palette: lime #AFC22E, olive #6E8E1E, teal #1D4E5B, cream #ECEFE3, dark olive #3C4A1E.
+   No violet/pink. Dark = near-black + aurora; light = periwinkle.
+   ========================================================= */
 
 :root {
-  --bg-primary: #050510;
-  --bg-secondary: #0b0b18;
-  --bg-card: #111122;
-  --text-primary: #f9fafb;
-  --text-secondary: #a5b4fc;
-  --accent: #6366f1;
-  --accent-soft: rgba(99, 102, 241, 0.18);
-  --border: #2d3148;
-  --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 45%, #ec4899 100%);
-  /* Spring easing used throughout for the bounce/overshoot hover feel */
+  --bg-primary: #0E140C;
+  --bg-secondary: #161E14;
+  /* Glass surfaces — translucent so the aurora shows through with blur */
+  --bg-card: rgba(255, 255, 255, 0.045);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --bg-solid: #1A2418;
+  --text-primary: #ECEFE3;
+  --text-secondary: #A6B894;
+  --accent: #AFC22E;
+  --accent-2: #4E9AAC;
+  --accent-soft: rgba(175, 194, 46, 0.16);
+  --accent-glow: rgba(175, 194, 46, 0.40);
+  --border: rgba(255, 255, 255, 0.10);
+  /* Fill gradient (buttons, dots, icons): olive → teal so white text stays readable */
+  --gradient: linear-gradient(135deg, #5E7A18 0%, #1D5E6E 100%);
+  /* Heading gradient (gradient text): bright lime → teal, readable on the dark bg */
+  --gradient-heading: linear-gradient(120deg, #C2D44A 0%, #8FB03A 45%, #4E9AAC 100%);
+  /* Aurora glow blobs behind everything (dark) — lime + teal */
+  --aurora-1: rgba(175, 194, 46, 0.18);
+  --aurora-2: rgba(30, 90, 100, 0.28);
+  /* Easing */
   --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 [data-theme="light"] {
-  --bg-primary: #f9fafb;
-  --bg-secondary: #f3f4f6;
-  --bg-card: #ffffff;
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
-  --accent: #6366f1;
-  --accent-soft: rgba(99, 102, 241, 0.10);
-  --border: #e5e7eb;
-  --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  /* Softer, calmer light mode — a muted lavender-grey instead of stark white,
+     so the blue accents and aurora no longer feel harsh. White cards now read
+     as clean panels against the slightly darker background. */
+  /* Soft sage light mode — calm green-tinted neutral, not stark white.
+     Dark olive text + olive/teal accents read cleanly on it. */
+  --bg-primary: #E6EADB;
+  --bg-secondary: #DBE0CC;
+  --bg-card: rgba(255, 255, 255, 0.78);
+  --bg-card-hover: #ffffff;
+  --bg-solid: #ffffff;
+  --text-primary: #2A3416;
+  --text-secondary: #586645;
+  --accent: #5E7A18;
+  --accent-2: #1D4E5B;
+  --accent-soft: #E2E8C8;
+  --accent-glow: rgba(94, 122, 24, 0.18);
+  --border: rgba(60, 74, 30, 0.16);
+  --gradient: linear-gradient(135deg, #5E7A18 0%, #1D5E6E 100%);
+  /* Darker heading gradient so gradient titles read on the light sage bg */
+  --gradient-heading: linear-gradient(120deg, #4A6614 0%, #5E7A18 45%, #1D4E5B 100%);
+  /* Very soft aurora so the green only whispers behind the content */
+  --aurora-1: rgba(94, 122, 24, 0.06);
+  --aurora-2: rgba(29, 78, 91, 0.14);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at top, #111827 0, var(--bg-primary) 40%, #020617 100%);
+  background: var(--bg-primary);
   color: var(--text-primary);
-  transition: background 0.3s ease, color 0.3s ease;
+  position: relative;
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
-/* NAVBAR */
+/* AURORA BACKGROUND — slow-drifting glow blobs behind all content.
+   Pure CSS via a fixed pseudo-element; no HTML or JS needed. */
+body::before {
+  content: '';
+  position: fixed;
+  top: -30%;
+  left: -30%;
+  width: 160%;
+  height: 160%;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 22% 28%, var(--aurora-1), transparent 38%),
+    radial-gradient(circle at 78% 22%, var(--aurora-2), transparent 36%),
+    radial-gradient(circle at 55% 80%, var(--aurora-1), transparent 42%);
+  filter: blur(30px);
+  animation: auroraDrift 26s ease-in-out infinite alternate;
+}
+
+/* HEADINGS use the Space Grotesk display face */
+h1, h2, h3,
+.logo, .page-title, .hero-title,
+.stat-number, .not-found-code {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* NAVBAR — frosted glass */
 
 .navbar {
   display: flex;
   justify-content: center;
-  background: rgba(5, 5, 16, 0.96);
-  backdrop-filter: blur(18px);
+  background: rgba(8, 8, 15, 0.65);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 1000;
-  transition: background 0.3s ease;
+  transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 [data-theme="light"] .navbar {
-  background: rgba(249, 250, 251, 0.96);
+  background: rgba(222, 220, 234, 0.72);
 }
 
 .nav-container {
@@ -66,13 +133,17 @@ body {
   gap: 0.75rem;
 }
 
+/* Animated gradient logo */
 .logo {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  background: var(--gradient);
+  background: var(--gradient-heading);
+  background-size: 250% 250%;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-decoration: none;
+  animation: gradientShift 7s ease infinite;
 }
 
 .nav-links {
@@ -91,7 +162,7 @@ body {
   font-weight: 500;
   font-size: 0.95rem;
   padding-bottom: 2px;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: color 0.25s ease, border-color 0.25s ease;
   border-bottom: 2px solid transparent;
   display: inline-flex;
   align-items: center;
@@ -108,21 +179,24 @@ body {
   border-bottom-color: var(--accent);
 }
 
+/* Theme toggle — glass pill with glow on hover */
 .theme-toggle {
   cursor: pointer;
   font-size: 1.1rem;
-  border: none;
+  border: 1px solid var(--border);
   background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--text-primary);
   padding: 0.4rem 0.9rem;
   border-radius: 999px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  box-shadow: 0 0 0 1px var(--border);
+  transition: transform 0.25s var(--spring), box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .theme-toggle:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 22px var(--accent-glow);
+  border-color: var(--accent);
 }
 
 /* LAYOUT */
@@ -135,25 +209,20 @@ body {
 
 .section {
   margin-bottom: 3rem;
-  animation: fadeIn 0.25s ease;
+  animation: fadeIn 0.3s ease;
 }
 
-.section h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* PAGE TITLE (used on About, Projects pages) */
-
+/* Animated gradient section headings */
+.section h2,
 .page-title {
-  font-size: 2rem;
+  font-size: 2.1rem;
   margin-bottom: 1.5rem;
-  background: var(--gradient);
+  background: var(--gradient-heading);
+  background-size: 250% 250%;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: gradientShift 7s ease infinite;
 }
 
 .section-subtitle {
@@ -169,7 +238,7 @@ body {
 .hero-inner {
   display: grid;
   grid-template-columns: minmax(220px, 280px) minmax(260px, 1fr);
-  gap: 2.2rem;
+  gap: 2.4rem;
   align-items: center;
 }
 
@@ -181,27 +250,52 @@ body {
   text-align: left;
 }
 
+.about-column h1 {
+  font-size: 2.5rem;
+  margin: 0 0 0.6rem;
+  background: var(--gradient-heading);
+  background-size: 250% 250%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 7s ease infinite;
+}
+
+/* Profile picture with ANIMATED GRADIENT RING (#7).
+   The rotating conic gradient lives on ::before so the photo stays still. */
+.profile-container {
+  position: relative;
+  width: 218px;
+  height: 218px;
+  margin: 0 auto 0.9rem;
+  display: grid;
+  place-items: center;
+}
+
+.profile-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #AFC22E, #4E9AAC, #6E8E1E, #AFC22E);
+  animation: spinBorder 6s linear infinite;
+  box-shadow: 0 0 50px var(--accent-glow);
+}
+
 .profile-pic {
-  width: 210px;
-  height: 210px;
+  position: relative;
+  z-index: 1;
+  width: 206px;
+  height: 206px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid transparent;
-  background: var(--gradient);
-  padding: 4px;
-  margin-bottom: 0.9rem;
-  box-shadow: 0 18px 55px rgba(15, 23, 42, 0.9);
+  background: var(--bg-primary);
+  border: none;
 }
 
 .hero-title {
   font-size: 2.4rem;
   margin: 0;
-}
-
-.hero-title span {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .hero-role {
@@ -213,18 +307,22 @@ body {
 .subtitle {
   color: var(--text-secondary);
   margin-bottom: 1rem;
-  line-height: 1.5;
-  font-size: 0.98rem;
+  line-height: 1.55;
+  font-size: 1rem;
 }
 
+/* Glass info box */
 .about-box {
-  background: radial-gradient(circle at top left, var(--accent-soft), var(--bg-card));
+  background: var(--bg-card);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 1.1rem 1.2rem;
+  border-radius: 18px;
+  padding: 1.2rem 1.3rem;
   margin: 1.1rem 0 1.4rem;
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 0.97rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .about-box a {
@@ -237,7 +335,7 @@ body {
   text-decoration: underline;
 }
 
-/* SOCIAL LINKS (Home page) */
+/* SOCIAL LINKS (Home page) — glass pills with glow */
 
 .social-links {
   display: flex;
@@ -253,19 +351,20 @@ body {
   padding: 0.45rem 1rem;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: var(--bg-card);
-  color: var(--text-secondary);
+  /* Matches the buttons: transparent at rest, fills with the gradient on hover */
+  background: transparent;
+  color: var(--text-primary);
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.25s var(--ease);
 }
 
 .social-link:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.2);
+  background: var(--gradient);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 12px 34px var(--accent-glow), 0 0 26px var(--accent-glow);
 }
 
 /* TECH STACK (Home page) */
@@ -280,44 +379,34 @@ body {
   gap: 1.2rem;
 }
 
-/* Staggered entrance animation for each skill card */
+/* Glass skill cards. Entrance handled by JS scroll-reveal (.js-reveal). */
 .skill-category {
-  background: radial-gradient(circle at top left, var(--accent-soft), var(--bg-card));
+  background: var(--bg-card);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 1rem 1.1rem;
-  /* Spring easing gives a natural overshoot/bounce on hover */
-  transition: transform 0.35s var(--spring),
-              box-shadow 0.3s ease,
-              border-color 0.3s ease;
-  animation: fadeInUp 0.4s ease both;
+  border-radius: 18px;
+  padding: 1.1rem 1.2rem;
+  transition: transform 0.4s var(--spring),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease,
+              background 0.35s ease;
   cursor: default;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* Stagger delay per card so they cascade in on page load */
-.skill-category:nth-child(1)  { animation-delay: 0.05s; }
-.skill-category:nth-child(2)  { animation-delay: 0.10s; }
-.skill-category:nth-child(3)  { animation-delay: 0.15s; }
-.skill-category:nth-child(4)  { animation-delay: 0.20s; }
-.skill-category:nth-child(5)  { animation-delay: 0.25s; }
-.skill-category:nth-child(6)  { animation-delay: 0.30s; }
-.skill-category:nth-child(7)  { animation-delay: 0.35s; }
-.skill-category:nth-child(8)  { animation-delay: 0.40s; }
-.skill-category:nth-child(9)  { animation-delay: 0.45s; }
-.skill-category:nth-child(10) { animation-delay: 0.50s; }
-
-/* Hover: spring lift, accent glow, accent border */
 .skill-category:hover {
   transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 20px 50px rgba(99, 102, 241, 0.28);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.4), 0 0 30px var(--accent-glow);
   border-color: var(--accent);
+  background: var(--bg-card-hover);
 }
 
 .skill-category h4 {
   margin: 0 0 0.7rem 0;
   font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.1em;
   color: var(--accent);
   font-weight: 600;
 }
@@ -328,7 +417,7 @@ body {
   gap: 0.4rem;
 }
 
-/* Individual tags bounce and fill on hover */
+/* Tags bounce + fill on hover */
 .skill-tag {
   background: var(--accent-soft);
   color: var(--text-primary);
@@ -339,29 +428,30 @@ body {
   font-weight: 500;
   display: inline-block;
   transition: transform 0.3s var(--spring),
-              background 0.2s ease,
-              color 0.2s ease,
-              border-color 0.2s ease;
+              background 0.25s ease,
+              color 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
   cursor: default;
 }
 
 .skill-tag:hover {
-  transform: scale(1.14) translateY(-2px);
-  background: var(--accent);
+  transform: scale(1.12) translateY(-2px);
+  background: var(--gradient);
   color: #ffffff;
-  border-color: var(--accent);
+  border-color: transparent;
+  box-shadow: 0 0 16px var(--accent-glow);
 }
 
-/* In light mode the card and tag backgrounds are both accent-soft (same lavender),
-   making tag borders invisible. Override to white bg + stronger border for contrast. */
+/* Light mode: white tag bg so it reads against the glass card */
 [data-theme="light"] .skill-tag {
   background: #ffffff;
-  border-color: #c7d2fe; /* indigo-200 — visible but still on-palette */
+  border-color: #C3CF9E;
 }
 
 [data-theme="light"] .skill-tag:hover {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--gradient);
+  border-color: transparent;
   color: #ffffff;
 }
 
@@ -375,28 +465,34 @@ body {
 }
 
 .stat-card {
-  background: radial-gradient(circle at top left, var(--accent-soft), var(--bg-card));
+  background: var(--bg-card);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 1.1rem 1rem;
+  border-radius: 18px;
+  padding: 1.2rem 1rem;
   text-align: center;
-  transition: transform 0.35s var(--spring),
-              box-shadow 0.3s ease,
-              border-color 0.3s ease;
+  transition: transform 0.4s var(--spring),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease,
+              background 0.35s ease;
   cursor: default;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .stat-card:hover {
   transform: translateY(-6px) scale(1.04);
-  box-shadow: 0 18px 45px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 26px var(--accent-glow);
   border-color: var(--accent);
+  background: var(--bg-card-hover);
 }
 
 .stat-number {
-  font-size: 1.9rem;
+  font-size: 2rem;
   font-weight: 700;
-  background: var(--gradient);
+  background: var(--gradient-heading);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1.1;
 }
@@ -410,16 +506,16 @@ body {
 
 .about-text p {
   color: var(--text-secondary);
-  line-height: 1.75;
+  line-height: 1.78;
   margin-bottom: 1.1rem;
-  font-size: 0.97rem;
+  font-size: 0.98rem;
 }
 
 .about-text p:last-child {
   margin-bottom: 0;
 }
 
-/* BUTTONS */
+/* BUTTONS — magnetic (JS) + glow (CSS) */
 
 .cta-buttons {
   display: flex;
@@ -428,39 +524,47 @@ body {
 }
 
 .btn {
-  padding: 0.6rem 1.4rem;
+  padding: 0.65rem 1.5rem;
   border-radius: 999px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.25s ease;
+  /* transform transition kept snappy so the magnetic pull feels responsive */
+  transition: transform 0.2s var(--ease), box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   text-decoration: none;
   display: inline-block;
   text-align: center;
   font-size: 0.95rem;
+  will-change: transform;
 }
 
 .btn-primary {
-  background: var(--gradient);
-  color: #ffffff;
-  border: none;
-  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.35);
+  /* Subtle neutral outline at rest (no accent border so it isn't "marked").
+     Both buttons share this look and fill identically on hover. */
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  box-shadow: none;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(99, 102, 241, 0.45);
+  background: var(--gradient);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 12px 34px var(--accent-glow), 0 0 26px var(--accent-glow);
 }
 
 .btn-secondary {
+  /* Identical to .btn-primary so both buttons stay consistent */
   background: transparent;
   color: var(--text-primary);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
 }
 
 .btn-secondary:hover {
-  border-color: var(--accent);
-  background: var(--accent);
+  background: var(--gradient);
   color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 12px 34px var(--accent-glow), 0 0 26px var(--accent-glow);
 }
 
 /* TIMELINE (EXPERIENCE) */
@@ -481,64 +585,60 @@ body {
   bottom: 0;
   left: 50%;
   width: 2px;
-  background: var(--border);
+  background: linear-gradient(to bottom, var(--accent), var(--accent-2));
+  opacity: 0.5;
 }
 
-/* Staggered entrance for timeline items.
-   .timeline-line is the first child, so items start at nth-child(2) */
 .timeline-item {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   margin: 2.4rem 0;
-  animation: fadeInUp 0.5s ease both;
 }
-
-.timeline-item:nth-child(2) { animation-delay: 0.10s; }
-.timeline-item:nth-child(3) { animation-delay: 0.20s; }
-.timeline-item:nth-child(4) { animation-delay: 0.30s; }
-.timeline-item:nth-child(5) { animation-delay: 0.40s; }
-.timeline-item:nth-child(6) { animation-delay: 0.50s; }
 
 .timeline-dot {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--gradient);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 22px var(--accent-glow);
   font-size: 1rem;
+  z-index: 1;
   transition: transform 0.3s var(--spring), box-shadow 0.3s ease;
 }
 
-/* Dot pulses slightly when hovering its card */
 .timeline-item:hover .timeline-dot {
-  transform: translate(-50%, 0) scale(1.18);
-  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5);
+  transform: translate(-50%, 0) scale(1.2);
+  box-shadow: 0 0 34px var(--accent-glow);
 }
 
+/* Glass timeline card */
 .timeline-card {
-  background: radial-gradient(circle at top left, var(--accent-soft), var(--bg-card));
-  border-radius: 16px;
+  background: var(--bg-card);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-radius: 18px;
   border: 1px solid var(--border);
-  padding: 1rem 1.2rem;
+  padding: 1.1rem 1.3rem;
   max-width: 420px;
   text-align: left;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
 }
 
 .timeline-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.7);
+  transform: translateY(-5px);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.4), 0 0 26px var(--accent-glow);
   border-color: var(--accent);
+  background: var(--bg-card-hover);
 }
 
 .timeline-item:nth-child(odd) .timeline-card {
@@ -553,15 +653,16 @@ body {
 
 .timeline-date {
   font-size: 0.85rem;
-  color: #facc15;
+  color: var(--accent-2);
   margin: 0 0 0.3rem;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 .timeline-role {
   margin: 0 0 0.1rem;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .timeline-company {
@@ -574,16 +675,16 @@ body {
   gap: 0.5rem;
 }
 
-/* Badge for MSc / dissertation entries in the timeline */
+/* Badge for MSc / dissertation entries — now on-palette (was yellow) */
 .timeline-badge {
   display: inline-block;
   font-size: 0.7rem;
   font-weight: 600;
   padding: 0.15rem 0.6rem;
   border-radius: 999px;
-  background: rgba(250, 204, 21, 0.15);
-  border: 1px solid rgba(250, 204, 21, 0.4);
-  color: #facc15;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  color: var(--accent);
   letter-spacing: 0.03em;
   white-space: nowrap;
 }
@@ -620,17 +721,20 @@ body {
   border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--text-secondary);
   cursor: pointer;
   font-size: 0.85rem;
-  transition: all 0.25s ease;
+  transition: all 0.25s var(--ease);
 }
 
 .filter-btn.active,
 .filter-btn:hover {
-  background: var(--accent);
+  background: var(--gradient);
   color: #ffffff;
-  border-color: var(--accent);
+  border-color: transparent;
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 /* 2-column grid on wider screens */
@@ -649,56 +753,69 @@ body {
   }
 }
 
+/* Glass project card. Staggered entrance via fadeInUp (injected dynamically). */
 .project-card {
-  background: radial-gradient(circle at top left, var(--accent-soft), var(--bg-card));
-  border-radius: 16px;
+  background: var(--bg-card);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-radius: 18px;
   border: 1px solid var(--border);
   text-decoration: none;
   color: inherit;
   padding: 0.9rem;
-  transition: transform 0.3s var(--spring),
-              box-shadow 0.3s ease,
-              border-color 0.3s ease;
+  transition: transform 0.35s var(--spring),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease,
+              background 0.35s ease;
   display: flex;
   flex-direction: column;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  animation: fadeInUp 0.5s var(--ease) both;
 }
 
+.project-card:nth-child(1) { animation-delay: 0.05s; }
+.project-card:nth-child(2) { animation-delay: 0.12s; }
+.project-card:nth-child(3) { animation-delay: 0.19s; }
+.project-card:nth-child(4) { animation-delay: 0.26s; }
+.project-card:nth-child(5) { animation-delay: 0.33s; }
+.project-card:nth-child(6) { animation-delay: 0.40s; }
+
 .project-card:hover {
-  transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
+  transform: translateY(-7px) scale(1.015);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.45), 0 0 30px var(--accent-glow);
   border-color: var(--accent);
+  background: var(--bg-card-hover);
 }
 
 .project-thumb {
   width: 100%;
   height: 160px;
-  border-radius: 12px;
+  border-radius: 14px;
   margin-bottom: 0.8rem;
-  background-color: #020617;
-  background-image: radial-gradient(circle at top left, rgba(96, 165, 250, 0.3), rgba(15, 23, 42, 0.9));
+  background-color: var(--bg-secondary);
+  background-image: radial-gradient(circle at 30% 25%, rgba(175, 194, 46, 0.4), rgba(29, 78, 91, 0.18) 55%, transparent 75%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  /* Fix #2: overflow hidden ensures the zoom effect on hover
-     stays clipped to the rounded corners and doesn't bleed out */
+  /* overflow hidden keeps the hover zoom clipped to rounded corners */
   overflow: hidden;
-  transition: transform 0.4s ease;
+  transition: transform 0.45s var(--ease);
 }
 
-/* Thumbnail zooms slightly when the card is hovered */
 .project-card:hover .project-thumb {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 .project-info h3 {
   margin: 0 0 0.4rem 0;
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .project-info p {
   margin: 0 0 0.7rem 0;
   color: var(--text-secondary);
   font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .project-topics {
@@ -707,65 +824,26 @@ body {
   gap: 0.4rem;
 }
 
+/* Language/topic tags — on-palette glass pills (replaced the old green) */
 .lang-tag {
-  background: var(--accent);
-  color: #ffffff;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--border);
   padding: 0.18rem 0.7rem;
   border-radius: 999px;
   font-size: 0.75rem;
+  font-weight: 500;
 }
 
-.project-topics .lang-tag {
-  background: #10b981;
+[data-theme="dark"] .lang-tag {
+  color: #C8D86A;
 }
 
-/* SKELETON SHIMMER — shown while projects load from GitHub API.
-   Uses CSS variables so it works correctly in both dark and light mode. */
-
-.skeleton-card {
-  background: radial-gradient(circle at top left, var(--accent-soft), var(--bg-card));
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  padding: 0.9rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-
-.skeleton-thumb {
-  width: 100%;
-  height: 160px;
-  border-radius: 12px;
-  background: linear-gradient(90deg, var(--bg-card) 0%, var(--accent-soft) 50%, var(--bg-card) 100%);
-  background-size: 200% 100%;
-  animation: shimmer 1.6s ease-in-out infinite;
-}
-
-.skeleton-line {
-  height: 13px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--bg-card) 0%, var(--accent-soft) 50%, var(--bg-card) 100%);
-  background-size: 200% 100%;
-  animation: shimmer 1.6s ease-in-out infinite;
-}
-
-.skeleton-line.short  { width: 45%; }
-.skeleton-line.medium { width: 70%; }
-.skeleton-line.full   { width: 100%; }
-
-.skeleton-tags {
-  display: flex;
-  gap: 0.4rem;
-  margin-top: 0.2rem;
-}
-
-.skeleton-tag {
-  height: 22px;
-  width: 58px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--bg-card) 0%, var(--accent-soft) 50%, var(--bg-card) 100%);
-  background-size: 200% 100%;
-  animation: shimmer 1.6s ease-in-out infinite;
+/* Timeline tags get the filled gradient look for emphasis */
+.timeline-tags .lang-tag {
+  background: var(--gradient);
+  color: #ffffff;
+  border-color: transparent;
 }
 
 /* CONTACT */
@@ -781,7 +859,7 @@ body {
 .contact-form input,
 .contact-form textarea {
   padding: 0.9rem;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid var(--border);
   background: var(--bg-card);
   color: var(--text-primary);
@@ -798,6 +876,7 @@ body {
 .contact-form textarea:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 18px var(--accent-glow);
 }
 
 /* EDUCATION */
@@ -809,22 +888,27 @@ body {
 }
 
 .education-card {
-  background: radial-gradient(circle at top left, var(--accent-soft), var(--bg-card));
-  border-radius: 16px;
+  background: var(--bg-card);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-radius: 18px;
   border: 1px solid var(--border);
-  padding: 1rem 1.2rem;
+  padding: 1.1rem 1.3rem;
   color: var(--text-secondary);
   font-size: 0.94rem;
-  transition: transform 0.35s var(--spring),
-              box-shadow 0.3s ease,
-              border-color 0.3s ease;
+  transition: transform 0.4s var(--spring),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease,
+              background 0.35s ease;
   cursor: default;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .education-card:hover {
   transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 18px 45px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 26px var(--accent-glow);
   border-color: var(--accent);
+  background: var(--bg-card-hover);
 }
 
 .edu-header {
@@ -835,8 +919,8 @@ body {
 }
 
 .edu-icon {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 999px;
   background: var(--gradient);
   display: flex;
@@ -846,17 +930,17 @@ body {
   color: #ffffff;
   font-weight: 700;
   flex-shrink: 0;
-  transition: transform 0.35s var(--spring);
+  box-shadow: 0 0 18px var(--accent-glow);
+  transition: transform 0.4s var(--spring);
 }
 
-/* Icon pops on card hover */
 .education-card:hover .edu-icon {
-  transform: scale(1.2) rotate(-5deg);
+  transform: scale(1.2) rotate(-6deg);
 }
 
 .edu-header h3 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--text-primary);
 }
 
@@ -890,6 +974,56 @@ body {
   opacity: 0.95;
 }
 
+/* SKELETON SHIMMER — shown while projects load from GitHub API */
+
+.skeleton-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.skeleton-thumb {
+  width: 100%;
+  height: 160px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-soft) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeleton-line {
+  height: 13px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-soft) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeleton-line.short  { width: 45%; }
+.skeleton-line.medium { width: 70%; }
+.skeleton-line.full   { width: 100%; }
+
+.skeleton-tags {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+}
+
+.skeleton-tag {
+  height: 22px;
+  width: 58px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-soft) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
 /* 404 PAGE */
 
 .not-found-section {
@@ -904,13 +1038,16 @@ body {
 }
 
 .not-found-code {
-  font-size: 6rem;
+  font-size: 7rem;
   font-weight: 700;
-  background: var(--gradient);
+  background: var(--gradient-heading);
+  background-size: 250% 250%;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1;
   margin-bottom: 0.5rem;
+  animation: gradientShift 7s ease infinite;
 }
 
 .not-found-title {
@@ -928,7 +1065,7 @@ body {
   line-height: 1.6;
 }
 
-/* LOADING (legacy spinner — kept for fallback) */
+/* LOADING (legacy spinner — fallback) */
 
 .spinner {
   width: 36px;
@@ -946,6 +1083,23 @@ body {
   font-size: 0.9rem;
 }
 
+/* =========================================================
+   SCROLL REVEAL
+   .js-reveal is added by script.js (progressive enhancement —
+   if JS is off, content is never hidden). .is-visible plays it in.
+   ========================================================= */
+.js-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  will-change: opacity, transform;
+}
+
+.js-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 /* ANIMATIONS */
 
 @keyframes spin {
@@ -957,16 +1111,33 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Used for staggered entrance of skill cards and timeline items */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Skeleton shimmer sweep */
 @keyframes shimmer {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* Aurora drift — slow organic motion of the background glow */
+@keyframes auroraDrift {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate(3%, 4%) rotate(8deg) scale(1.08); }
+  100% { transform: translate(-3%, -2%) rotate(-6deg) scale(1.05); }
+}
+
+/* Animated gradient text sweep */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Rotating conic gradient ring for the profile photo */
+@keyframes spinBorder {
+  to { transform: rotate(360deg); }
 }
 
 /* RESPONSIVE */
@@ -983,6 +1154,10 @@ body {
 
   .about-column {
     text-align: center;
+  }
+
+  .about-column h1 {
+    font-size: 2.1rem;
   }
 
   .about-box {
@@ -1028,8 +1203,9 @@ body {
 }
 
 /* ACCESSIBILITY — prefers-reduced-motion
-   Disables all animations and transitions for users who have
-   requested reduced motion in their OS accessibility settings. */
+   Disables animations/transitions (including aurora, gradient sweeps,
+   spinning ring) for users who request reduced motion. Reveal elements
+   are forced visible so nothing stays hidden. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -1037,4 +1213,60 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  .js-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  body::before {
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   GRADIENT SUB-HEADINGS + ANIMATED EMOJIS (added)
+   ========================================================= */
+
+/* Extend the gradient identity to secondary titles for a cohesive look */
+.timeline-role,
+.project-info h3,
+.edu-header h3 {
+  background: var(--gradient-heading);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Waving hand beside the hero greeting.
+   Reset the text-clip so the emoji shows its real colours, not the gradient. */
+.wave {
+  display: inline-block;
+  -webkit-text-fill-color: initial;
+  background: none;
+  transform-origin: 70% 70%;
+  animation: wave 2.4s ease-in-out infinite;
+}
+
+/* Hero emojis gently float, staggered */
+.float-emoji {
+  display: inline-block;
+  animation: floaty 3s ease-in-out infinite;
+}
+.float-emoji:nth-of-type(1) { animation-delay: 0s; }
+.float-emoji:nth-of-type(2) { animation-delay: 0.4s; }
+.float-emoji:nth-of-type(3) { animation-delay: 0.8s; }
+
+@keyframes wave {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
 }

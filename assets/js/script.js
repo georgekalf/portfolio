@@ -661,4 +661,118 @@ document.addEventListener('DOMContentLoaded', function () {
     loadProjects();
   }
 
+  // =========================
+  // FUTURISTIC MOTION LAYER
+  // Scroll-reveal, count-up stats, magnetic buttons.
+  // All respect prefers-reduced-motion and degrade gracefully.
+  // =========================
+
+  var prefersReduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- Scroll reveal ----
+  // Adds .js-reveal (hidden state) to static content, then .is-visible
+  // when it scrolls into view. Done in JS so non-JS users never see
+  // hidden content. Skipped entirely under reduced-motion.
+  function setupScrollReveal() {
+    if (prefersReduced || !('IntersectionObserver' in window)) return;
+
+    var targets = document.querySelectorAll(
+      '.skill-category, .stat-card, .timeline-item, .education-card, .about-box, .section > h2, .page-title'
+    );
+    if (!targets.length) return;
+
+    targets.forEach(function (el, i) {
+      el.classList.add('js-reveal');
+      // Gentle stagger within a group (capped so nothing waits too long)
+      el.style.transitionDelay = ((i % 6) * 0.07) + 's';
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    targets.forEach(function (el) { observer.observe(el); });
+  }
+
+  // ---- Count-up stat numbers ----
+  // Parses "3.5M+", "£80k", "20+" into prefix / number / suffix and
+  // animates the number from 0 when the card scrolls into view.
+  function animateCount(el) {
+    var text = el.textContent.trim();
+    var match = text.match(/^([^\d]*)([\d.]+)(.*)$/);
+    if (!match) return;
+
+    var prefix = match[1];
+    var numStr = match[2];
+    var suffix = match[3];
+    var target = parseFloat(numStr);
+    var decimals = (numStr.split('.')[1] || '').length;
+    var duration = 1400;
+    var startTime = null;
+
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      el.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = prefix + target.toFixed(decimals) + suffix;
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  function setupCountUp() {
+    var numbers = document.querySelectorAll('.stat-number');
+    if (!numbers.length) return;
+
+    // Reduced motion: leave the final values as-is, no animation
+    if (prefersReduced || !('IntersectionObserver' in window)) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    numbers.forEach(function (el) { observer.observe(el); });
+  }
+
+  // ---- Magnetic buttons ----
+  // Buttons nudge gently toward the cursor. Subtle (max a few px).
+  // Disabled under reduced-motion and on touch-only devices.
+  function setupMagneticButtons() {
+    if (prefersReduced) return;
+    // Skip on touch devices where there's no hover cursor
+    if (window.matchMedia && window.matchMedia('(hover: none)').matches) return;
+
+    var buttons = document.querySelectorAll('.btn');
+    buttons.forEach(function (btn) {
+      btn.addEventListener('mousemove', function (e) {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width / 2;
+        var y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = 'translate(' + (x * 0.18) + 'px,' + (y * 0.3) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function () {
+        btn.style.transform = '';
+      });
+    });
+  }
+
+  setupScrollReveal();
+  setupCountUp();
+  setupMagneticButtons();
+
 });
