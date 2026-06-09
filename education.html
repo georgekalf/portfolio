@@ -1,168 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Education - Georgios Kalfas</title>
-  <meta name="description" content="Education history of Georgios Kalfas – MSc Business Analytics at Bayes Business School and BSc Marketing at AUEB." />
-  <meta name="theme-color" content="#1D4E5B" />
-
-  <!-- Open Graph / LinkedIn preview -->
-  <meta property="og:title" content="Education – Georgios Kalfas" />
-  <meta property="og:description" content="MSc Business Analytics at Bayes Business School and BSc Marketing at AUEB." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://georgekalf.github.io/portfolio/education.html" />
-  <meta property="og:image" content="https://georgekalf.github.io/portfolio/assets/images/profile.jpg" />
-
-  <!-- Favicon -->
-  <link rel="icon" href="assets/images/favicon.ico" />
-
-  <!-- Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- CSS from assets/css -->
-  <link rel="stylesheet" href="assets/css/style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Education — Georgios Kalfas</title>
+<meta name="description" content="Education — Georgios Kalfas. MSc Business Analytics at Bayes Business School and BSc at AUEB." />
+<meta name="theme-color" content="#0A130D" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/cinematic.css" />
+<script>
+(function () {
+  var t; try { t = localStorage.getItem('gk-theme'); } catch (e) {}
+  if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+  document.documentElement.classList.add('js');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reduce');
+})();
+</script>
 </head>
-<body data-theme="dark">
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="logo">Georgios Kalfas</a>
-      <ul class="nav-links">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="experience.html" class="nav-link">💼 Experience</a></li>
-        <li><a href="projects.html" class="nav-link">💻 Projects</a></li>
-        <li><a href="education.html" class="nav-link active">🎓 Education</a></li>
-        <li><a href="about.html" class="nav-link">👤 About</a></li>
-        <li><a href="contact.html" class="nav-link">✉️ Contact</a></li>
-      </ul>
-      <button class="theme-toggle" aria-label="Toggle theme"></button>
-    </div>
-  </nav>
+<body>
+<div class="cursor-dot"></div><div class="cursor-ring"></div>
 
-  <main class="main-content">
-    <section class="section">
-      <h2>Education</h2>
+<nav>
+  <a class="brand" href="index.html">Georgios Kalfas</a>
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html">Projects</a>
+    <a href="education.html" aria-current="page">Education</a>
+    <a href="contact.html">Contact</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark and light mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </div>
+</nav>
 
-      <div class="education-grid">
-        <!-- Bayes Business School -->
-        <div class="education-card">
-          <div class="edu-header">
-            <div class="edu-icon">B</div>
-            <div>
-              <h3>Bayes Business School</h3>
-              <p class="edu-degree">MSc, Business Analytics</p>
-              <p class="edu-meta">Sep 2021 – Sep 2022 · London, UK</p>
-            </div>
-          </div>
-          <p class="edu-description">
-            Advanced analytics-focused master's degree with a strong emphasis on machine learning, deep learning,
-            NLP, and data-driven strategy for business.
-          </p>
-          <ul class="edu-list">
-            <li>Network Analytics &amp; Digital Technologies</li>
-            <li>Machine Learning &amp; Applied Deep Learning</li>
-            <li>Natural Language Processing</li>
-            <li>Data Management Systems &amp; Analytics for Business</li>
-            <li>Strategic Business Analytics &amp; Revenue Management</li>
-            <li>Data Visualization, FinTech, New Market Creation</li>
-          </ul>
-          <p class="edu-extra">
-            Applied Research Project for Fiat (Fiat 500 full-electric model) analysing regulations, early adopter
-            sentiment and competitive dynamics in the UK EV market using NLP and network analysis on 10k+ YouTube comments.
-          </p>
+<header class="page-head">
+  <p class="hero-eyebrow">Education</p>
+  <h1 class="hero-name" aria-label="Education">Education</h1>
+  <p class="hero-tagline">Where the analytics foundation was built — from Athens to London.</p>
+</header>
+
+<section class="block">
+  <div class="edu-grid">
+
+    <div class="edu-card reveal">
+      <div class="edu-head">
+        <div class="edu-icon">B</div>
+        <div>
+          <h3>Bayes Business School</h3>
+          <p class="deg">MSc, Business Analytics</p>
+          <p class="meta">Sep 2021 — Sep 2022 · London, UK</p>
         </div>
-
-        <!-- Università del Piemonte Orientale -->
-        <div class="education-card">
-          <div class="edu-header">
-            <div class="edu-icon">U</div>
-            <div>
-              <h3>Università del Piemonte Orientale</h3>
-              <p class="edu-degree">FinTech Module (MSc Business Analytics)</p>
-              <p class="edu-meta">May 2022 · Italy (with Bayes Business School)</p>
-            </div>
-          </div>
-          <p class="edu-description">
-            Joint FinTech module completed in collaboration with Bayes Business School, combining finance and
-            analytics in a modern digital context.
-          </p>
-          <p class="edu-extra">
-            Focus on data-driven financial analysis, Python (Pandas), and applications of analytics in financial technology.
-          </p>
-        </div>
-
-        <!-- AUEB -->
-        <div class="education-card">
-          <div class="edu-header">
-            <div class="edu-icon">A</div>
-            <div>
-              <h3>Athens University of Economics and Business</h3>
-              <p class="edu-degree">BSc, Marketing and Communication</p>
-              <p class="edu-meta">2014 – 2020 · Athens, Greece</p>
-            </div>
-          </div>
-          <p class="edu-description">
-            Bachelor's degree specialising in Marketing, with a strong foundation in communication, market research
-            and strategic business practices.
-          </p>
-          <p class="edu-extra">
-            Covered consumer behaviour, product and service innovation, communication strategy, pricing, and
-            empirical data analysis for marketing decisions.
-          </p>
-        </div>
-
-        <!-- EM Strasbourg -->
-        <div class="education-card">
-          <div class="edu-header">
-            <div class="edu-icon">E</div>
-            <div>
-              <h3>EM Strasbourg Business School</h3>
-              <p class="edu-degree">Exchange · Business Administration &amp; Management</p>
-              <p class="edu-meta">Jan 2019 – Apr 2019 · Strasbourg, France</p>
-            </div>
-          </div>
-          <p class="edu-description">
-            Exchange semester at a top French business school, focusing on international business, leadership, and
-            entrepreneurship.
-          </p>
-          <ul class="edu-list">
-            <li>Innovation Management in European Context</li>
-            <li>International Environment &amp; Cross-cultural Collaboration</li>
-            <li>Entrepreneurship, Leadership &amp; Influence</li>
-            <li>Business Negotiations &amp; Storytelling</li>
-          </ul>
-        </div>
-
-        <!-- High School -->
-        <!-- <div class="education-card">
-          <div class="edu-header">
-            <div class="edu-icon">H</div>
-            <div>
-              <h3>8th High School of Trikala, Greece</h3>
-              <p class="edu-degree">High School Diploma, Technology Direction</p>
-              <p class="edu-meta">2012 · Grade: 18.3/20</p>
-            </div>
-          </div>
-          <p class="edu-description">
-            Technology-focused high school track combining STEM, economics, and applied computing.
-          </p>
-          <ul class="edu-list">
-            <li>Mathematics &amp; Physics</li>
-            <li>Development of Applications in Computer Environment</li>
-            <li>Business Administration &amp; Services</li>
-            <li>Maths &amp; Statistics · Economic Theory</li>
-          </ul>
-          <p class="edu-extra">
-            Member of the student board, football team captain, and active in academic competitions and school initiatives.
-          </p>
-        </div> -->
       </div>
-    </section>
-  </main>
+      <p>Advanced analytics-focused master's degree with a strong emphasis on machine learning, deep learning, NLP and data-driven strategy for business.</p>
+      <ul>
+        <li>Network Analytics &amp; Digital Technologies</li>
+        <li>Machine Learning &amp; Applied Deep Learning</li>
+        <li>Natural Language Processing</li>
+        <li>Data Management Systems &amp; Analytics for Business</li>
+        <li>Strategic Business Analytics &amp; Revenue Management</li>
+        <li>Data Visualization, FinTech, New Market Creation</li>
+      </ul>
+      <p class="extra">Applied Research Project for Fiat (Fiat 500 full-electric model): analysed regulations, early adopter sentiment and competitive dynamics in the UK EV market using NLP and network analysis on 10k+ YouTube comments.</p>
+    </div>
 
-  <!-- JS from assets/js -->
-  <script src="assets/js/script.js"></script>
+    <div class="edu-card reveal">
+      <div class="edu-head">
+        <div class="edu-icon">U</div>
+        <div>
+          <h3>Università del Piemonte Orientale</h3>
+          <p class="deg">FinTech Module (MSc Business Analytics)</p>
+          <p class="meta">May 2022 · Italy (with Bayes Business School)</p>
+        </div>
+      </div>
+      <p>Joint FinTech module completed in collaboration with Bayes Business School, combining finance and analytics in a modern digital context.</p>
+      <p class="extra">Focus on data-driven financial analysis, Python (Pandas) and applications of analytics in financial technology.</p>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-head">
+        <div class="edu-icon">A</div>
+        <div>
+          <h3>Athens University of Economics and Business</h3>
+          <p class="deg">BSc, Marketing and Communication</p>
+          <p class="meta">2014 — 2020 · Athens, Greece</p>
+        </div>
+      </div>
+      <p>Bachelor's degree specialising in Marketing, with a strong foundation in communication, market research and strategic business practices.</p>
+      <p class="extra">Covered consumer behaviour, product and service innovation, communication strategy, pricing and empirical data analysis for marketing decisions.</p>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-head">
+        <div class="edu-icon">E</div>
+        <div>
+          <h3>EM Strasbourg Business School</h3>
+          <p class="deg">Exchange · Business Administration &amp; Management</p>
+          <p class="meta">Jan 2019 — Apr 2019 · Strasbourg, France</p>
+        </div>
+      </div>
+      <p>Exchange semester at a top French business school, focusing on international business, leadership and entrepreneurship.</p>
+      <ul>
+        <li>Innovation Management in a European Context</li>
+        <li>International Environment &amp; Cross-cultural Collaboration</li>
+        <li>Entrepreneurship, Leadership &amp; Influence</li>
+        <li>Business Negotiations &amp; Storytelling</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+<script src="assets/js/cinematic.js"></script>
 </body>
 </html>
