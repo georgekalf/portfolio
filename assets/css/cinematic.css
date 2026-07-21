@@ -99,12 +99,18 @@ body.webgl-on .orb { opacity: .35; }
 .hero-eyebrow { font-size: .8rem; letter-spacing: .35em; text-transform: uppercase; color: var(--lime); margin-bottom: 1.2rem; }
 .hero-name {
   font-family: 'Space Grotesk', sans-serif; font-weight: 700;
-  font-size: clamp(2.8rem, 11vw, 8.5rem); line-height: .95; margin: 0; letter-spacing: -0.02em;
+  white-space: nowrap;
+  font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: .95; margin: 0; letter-spacing: -0.02em;
   background: var(--grad-text); background-size: 250% 250%;
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   animation: shift 8s ease infinite;
 }
-.hero-name .char { display: inline-block; will-change: transform; }
+.hero .hero-name {
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
+.hero-name .char { position: relative;  }
 .hero-tagline { max-width: 560px; color: var(--muted); font-size: 1.05rem; line-height: 1.6; }
 .hero .hero-tagline { margin: 1.6rem auto 0; }
 .hero-cta-row { display: flex; gap: .9rem; margin-top: 2rem; flex-wrap: wrap; }
