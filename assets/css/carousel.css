@@ -1,0 +1,58 @@
+/* Education carousel. Load after cinematic.css (uses its colour tokens). */
+
+.edu-carousel { display: none; }
+.js .edu-carousel { display: block; margin: 0 0 2.6rem; }
+
+.carousel-stage { height: 350px; display: grid; place-items: center;
+  touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+
+/* --r is the ring radius, --p the viewing distance */
+.carousel { --r: 300px; --p: 1200px; position: relative; isolation: isolate;
+  width: 240px; height: 310px; margin: 0; padding: 0; list-style: none; }
+
+/* Per card, set by carousel.js: --a angle on the ring, --t tilt, --d depth (1 = front, 0 = back) */
+.carousel-item { --a: calc(var(--index) * 90); --t: 0; --d: 1;
+  position: absolute; inset: 0; border-radius: 20px; background: var(--grad-fill);
+  transform: perspective(var(--p)) translateZ(calc(var(--r) * -1))
+    rotateY(calc(var(--a) * 1deg)) translateZ(var(--r)) rotateY(calc((var(--t) - var(--a)) * 1deg)); }
+/* cards further back fade towards the page colour */
+.carousel-item::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: var(--bg); opacity: calc(0.75 * (1 - var(--d))); transition: background .5s var(--ease); }
+
+.carousel-card { position: relative; width: 100%; height: 100%; margin: 0; padding: 1.2rem;
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: .25rem;
+  text-align: left; font: inherit; color: #F1F4E9; cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.14); border-radius: inherit; overflow: hidden;
+  background-color: transparent; background-size: cover; background-position: center; background-repeat: no-repeat;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+  transition: border-color .35s var(--ease), box-shadow .35s var(--ease); }
+.carousel-card::before { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(8,14,10,0.10) 25%, rgba(8,14,10,0.88) 100%); }
+.carousel-card > * { position: relative; }
+.carousel-card .edu-icon { margin-bottom: auto; }
+.cc-title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.12rem; line-height: 1.2; }
+.cc-sub { font-size: .85rem; color: #C2D44A; }
+.cc-meta { font-size: .76rem; color: rgba(241,244,233,0.72); }
+
+.carousel-item.is-active .carousel-card { border-color: var(--lime);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 34px var(--glow); }
+.carousel-card:focus-visible, .carousel-btn:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
+
+.carousel-controls { display: flex; align-items: center; justify-content: center; gap: 1.1rem; margin-top: 1.2rem; }
+.carousel-btn { width: 40px; height: 40px; flex: none; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+  background: var(--glass); border: 1px solid var(--border); color: var(--text);
+  transition: border-color .25s, color .25s; }
+.carousel-btn:hover { border-color: var(--lime); color: var(--lime); }
+.carousel-btn svg { width: 18px; height: 18px; }
+.carousel-count { min-width: 3.2rem; text-align: center; font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* Detail panel: one school at a time. Without JS the four cards fall back to the original grid. */
+.js .edu-panels { display: block; max-width: 760px; margin: 0 auto; }
+.js .edu-panel:not(.is-active) { display: none; }
+.js:not(.reduce) .edu-panel.is-active { animation: panel-in .5s var(--ease); }
+@keyframes panel-in { from { opacity: 0; transform: translateY(14px); } }
+
+@media (max-width: 760px) {
+  .carousel-stage { height: 300px; }
+  .carousel { --r: 190px; --p: 900px; width: 200px; height: 262px; }
+}

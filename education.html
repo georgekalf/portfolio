@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/css/cinematic.css" />
+<link rel="stylesheet" href="assets/css/carousel.css" />
 <script>
 (function () {
   var t; try { t = localStorage.getItem('gk-theme'); } catch (e) {}
@@ -47,9 +48,60 @@
 </header>
 
 <section class="block">
-  <div class="edu-grid">
 
-    <div class="edu-card reveal">
+  <!-- Carousel: one card per school. To add a school, add an <li> here and a matching .edu-panel below, in the same order. -->
+  <div class="edu-carousel reveal" id="eduCarousel">
+    <div class="carousel-stage">
+      <ul class="carousel">
+        <li class="carousel-item is-active" style="--index: 0;">
+          <button type="button" class="carousel-card" aria-pressed="true" style="background-image: url('assets/images/education/bayes.jpg');">
+            <!-- <span class="edu-icon">B</span> -->
+            <span class="cc-title">Bayes Business School</span>
+            <span class="cc-sub">MSc, Business Analytics</span>
+            <span class="cc-meta">2021 – 2022 · London</span>
+          </button>
+        </li>
+        <li class="carousel-item" style="--index: 1;">
+          <button type="button" class="carousel-card" aria-pressed="false" style="background-image: url('assets/images/education/upo.jpg');">
+            <!-- <span class="edu-icon">U</span> -->
+            <span class="cc-title">Università del Piemonte Orientale</span>
+            <span class="cc-sub">FinTech Module</span>
+            <span class="cc-meta">May 2022 · Italy</span>
+          </button>
+        </li>
+        <li class="carousel-item" style="--index: 2;">
+          <button type="button" class="carousel-card" aria-pressed="false" style="background-image: url('assets/images/education/aueb.jpg');">
+            <!-- <span class="edu-icon">A</span> -->
+            <span class="cc-title">Athens University of Economics and Business</span>
+            <span class="cc-sub">BSc, Marketing and Communication</span>
+            <span class="cc-meta">2014 – 2020 · Athens</span>
+          </button>
+        </li>
+        <li class="carousel-item" style="--index: 3;">
+          <button type="button" class="carousel-card" aria-pressed="false" style="background-image: url('assets/images/education/strasbourg.jpg');">
+            <!-- <span class="edu-icon">E</span> -->
+            <span class="cc-title">EM Strasbourg Business School</span>
+            <span class="cc-sub">Exchange semester</span>
+            <span class="cc-meta">Jan – Apr 2019 · Strasbourg</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="carousel-controls">
+      <button type="button" class="carousel-btn" data-dir="-1" aria-label="Previous school">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <span class="carousel-count" aria-hidden="true">1 / 4</span>
+      <button type="button" class="carousel-btn" data-dir="1" aria-label="Next school">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Details for the selected school -->
+  <div class="edu-grid edu-panels reveal" aria-live="polite">
+
+    <div class="edu-card edu-panel is-active">
       <div class="edu-head">
         <div class="edu-icon">B</div>
         <div>
@@ -70,7 +122,7 @@
       <p class="extra">Applied Research Project for Fiat (Fiat 500 full-electric model): analysed regulations, early adopter sentiment and competitive dynamics in the UK EV market using NLP and network analysis on 10k+ YouTube comments.</p>
     </div>
 
-    <div class="edu-card reveal">
+    <div class="edu-card edu-panel">
       <div class="edu-head">
         <div class="edu-icon">U</div>
         <div>
@@ -83,7 +135,7 @@
       <p class="extra">Focus on data-driven financial analysis, Python (Pandas) and applications of analytics in financial technology.</p>
     </div>
 
-    <div class="edu-card reveal">
+    <div class="edu-card edu-panel">
       <div class="edu-head">
         <div class="edu-icon">A</div>
         <div>
@@ -96,7 +148,7 @@
       <p class="extra">Covered consumer behaviour, product and service innovation, communication strategy, pricing and empirical data analysis for marketing decisions.</p>
     </div>
 
-    <div class="edu-card reveal">
+    <div class="edu-card edu-panel">
       <div class="edu-head">
         <div class="edu-icon">E</div>
         <div>
@@ -122,5 +174,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
 <script src="assets/js/cinematic.js"></script>
+<script src="assets/js/carousel.js"></script>
 </body>
 </html>

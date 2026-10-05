@@ -157,3 +157,21 @@
     });
   }
 })();
+
+/* ==========================================================================
+   Night sky (stars and shooting stars), visible in dark mode.
+   Added to the end of cinematic.js. The toggle button itself needs no new JavaScript: the click handler above still runs it.
+   ========================================================================== */
+;(function () {
+  if (!document.body || document.querySelector('.sky')) return;
+  var sky = document.createElement('div');
+  sky.className = 'sky';
+  sky.setAttribute('aria-hidden', 'true');
+  sky.innerHTML =
+    '<div class="page-stars"></div>' +
+    '<div class="shooting-stars">' +
+      '<span class="shooting"></span><span class="shooting"></span>' +
+      '<span class="shooting"></span><span class="shooting"></span>' +
+    '</div>';
+  document.body.insertBefore(sky, document.body.firstChild);
+})();

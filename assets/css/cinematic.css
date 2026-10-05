@@ -270,3 +270,133 @@ footer { text-align: center; padding: 2.5rem; color: var(--muted); font-size: .8
   body::before, .chip, .hero-name, .brand, .scroll-cue span, .reel { animation: none; }
   html { scroll-behavior: auto; }
 }
+/* ==========================================================================
+   Day / night toggle and night sky
+   ========================================================================== */
+
+/* The switch. The existing <button class="theme-toggle" id="themeToggle"> is reused as is:
+   the button is the sky, ::before is the sun / moon, ::after is the clouds / stars. */
+.theme-toggle {
+  position: relative; display: block; flex: none;
+  width: 62px; height: 32px; margin: 3px 0; padding: 0; overflow: hidden;
+  border: 1px solid var(--border); border-radius: 999px; cursor: pointer;
+  background: linear-gradient(180deg, #A8D5C6 0%, #5FA9B5 33%, #1D5E6E 55%, #12303A 70%, #0A130D 100%) 0 0 / 100% 300% no-repeat;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.22);
+  transition: background-position .6s var(--ease), border-color .25s, box-shadow .35s var(--ease);
+}
+[data-theme="dark"] .theme-toggle { background-position: 0 100%; }
+.theme-toggle:hover { transform: none; border-color: var(--lime);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.22), 0 0 16px var(--glow); }
+.theme-toggle:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+.theme-toggle svg { display: none; }
+
+/* sun (day) that slides across and becomes a crescent moon (night) */
+.theme-toggle::before {
+  content: ''; position: absolute; top: 4px; left: 4px; width: 22px; height: 22px; border-radius: 50%;
+  background-color: #EEF28A;
+  box-shadow: inset 0 0 0 0 #ECEFE3, 0 0 0 3px rgba(238,242,138,0.28), 0 0 10px 3px rgba(238,242,138,0.65);
+  filter: drop-shadow(0 0 3px rgba(236,239,227,0));
+  transition: transform .6s var(--ease), background-color .45s var(--ease), box-shadow .6s var(--ease), filter .6s var(--ease);
+}
+[data-theme="dark"] .theme-toggle::before {
+  transform: translateX(30px);
+  background-color: rgba(238,242,138,0);
+  box-shadow: inset -7px -3px 0 0 #ECEFE3, 0 0 0 3px rgba(238,242,138,0), 0 0 10px 3px rgba(238,242,138,0);
+  filter: drop-shadow(0 0 3px rgba(236,239,227,0.7));
+}
+
+/* six clouds (day) that shrink into six stars (night).
+   The 10px base circle is parked outside the pill; only its shadows are visible. */
+.theme-toggle::after {
+  content: ''; position: absolute; top: -20px; left: -20px; width: 10px; height: 10px; border-radius: 50%;
+  box-shadow:
+    55px 42px 0 1px rgba(241,244,233,0.95), 63px 40px 0 3px rgba(241,244,233,0.95), 72px 43px 0 2px rgba(241,244,233,0.95),
+    57px 24px 0 -2px rgba(241,244,233,0.6), 62px 23px 0 -1px rgba(241,244,233,0.6), 67px 25px 0 -2px rgba(241,244,233,0.6);
+  transition: box-shadow .6s var(--ease);
+}
+[data-theme="dark"] .theme-toggle::after {
+  box-shadow:
+    23px 36px 0 -4px rgba(236,239,227,0.95), 29px 23px 0 -3.5px rgba(236,239,227,0.95), 36px 32px 0 -4px rgba(194,212,74,0.95),
+    42px 22px 0 -4.3px rgba(236,239,227,0.8), 44px 38px 0 -4px rgba(236,239,227,0.9), 32px 41px 0 -4.3px rgba(127,196,212,0.95);
+}
+
+/* Night sky behind the page. The .sky element is added by cinematic.js.
+   It sits above the aurora (body::before) and below the 3D canvas and the vignette. */
+.sky { position: fixed; inset: 0; z-index: -3; overflow: hidden; pointer-events: none; }
+
+.page-stars, .shooting-stars {
+  position: absolute; inset: 0; pointer-events: none;
+  opacity: 0; transition: opacity 1.2s ease;
+}
+[data-theme="dark"] .page-stars, [data-theme="dark"] .shooting-stars { opacity: 1; }
+
+.page-stars::before, .page-stars::after {
+  content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 2px; border-radius: 50%;
+  animation: twinkle 6s ease-in-out infinite;
+}
+.page-stars::before {
+  box-shadow:
+    45.3vw 54.7vh 0 0 rgba(236,239,227,0.71), 58.6vw 18.7vh 0 0 rgba(236,239,227,0.78), 10.2vw 30.1vh 0 0 rgba(194,212,74,0.84),
+    5.1vw 95.3vh 0 0 rgba(236,239,227,0.79), 16.4vw 2.4vh 0 -0.4px rgba(236,239,227,0.53), 24.7vw 3.9vh 0 0 rgba(236,239,227,0.70),
+    51.9vw 62.5vh 0 0 rgba(236,239,227,0.80), 28.3vw 96.8vh 0 0 rgba(236,239,227,0.88), 31.9vw 23.0vh 0 0 rgba(236,239,227,0.53),
+    40.2vw 82.3vh 0 0 rgba(236,239,227,0.93), 1.1vw 21.1vh 2px 0.4px rgba(236,239,227,0.71), 39.9vw 8.0vh 0 -0.4px rgba(236,239,227,0.85),
+    9.5vw 32.9vh 0 -0.4px rgba(236,239,227,0.84), 25.1vw 10.7vh 0 -0.4px rgba(194,212,74,0.84), 55.8vw 44.0vh 0 -0.4px rgba(127,196,212,0.82),
+    64.1vw 12.2vh 0 -0.4px rgba(236,239,227,0.60), 96.2vw 78.1vh 0 -0.4px rgba(236,239,227,0.90), 39.6vw 83.0vh 2px 0.4px rgba(236,239,227,0.55),
+    21.9vw 25.8vh 0 -0.4px rgba(236,239,227,0.65), 8.2vw 9.7vh 0 0 rgba(236,239,227,0.61), 37.4vw 44.5vh 0 0 rgba(236,239,227,0.72),
+    85.9vw 18.6vh 0 0 rgba(127,196,212,0.87), 25.5vw 19.2vh 0 -0.4px rgba(236,239,227,0.92), 94.1vw 85.7vh 0 -0.4px rgba(236,239,227,0.69),
+    4.8vw 93.4vh 0 -0.4px rgba(127,196,212,0.81), 81.7vw 58.3vh 0 0 rgba(236,239,227,0.58), 7.7vw 22.9vh 0 0 rgba(236,239,227,0.88),
+    28.5vw 89.1vh 0 -0.4px rgba(127,196,212,0.60), 44.7vw 6.8vh 0 0 rgba(127,196,212,0.71), 13.9vw 35.8vh 0 0 rgba(236,239,227,0.94),
+    68.7vw 57.1vh 0 -0.4px rgba(127,196,212,0.61), 90.2vw 68.3vh 0 0 rgba(236,239,227,0.51), 48.3vw 71.1vh 0 -0.4px rgba(236,239,227,0.95);
+}
+.page-stars::after {
+  animation-delay: -3s;
+  box-shadow:
+    54.5vw 71.8vh 0 0 rgba(236,239,227,0.83), 78.7vw 88.8vh 2px 0.4px rgba(236,239,227,0.81), 86.4vw 41.0vh 0 0 rgba(236,239,227,0.89),
+    62.2vw 37.7vh 0 -0.4px rgba(236,239,227,0.77), 63.7vw 96.4vh 0 0 rgba(236,239,227,0.83), 73.0vw 56.8vh 0 -0.4px rgba(236,239,227,0.88),
+    74.5vw 3.9vh 0 -0.4px rgba(236,239,227,0.72), 69.4vw 48.7vh 0 -0.4px rgba(236,239,227,0.91), 2.1vw 29.9vh 0 -0.4px rgba(236,239,227,0.59),
+    89.8vw 64.4vh 0 -0.4px rgba(236,239,227,0.90), 66.3vw 20.1vh 2px 0.4px rgba(236,239,227,0.86), 87.3vw 37.9vh 0 -0.4px rgba(236,239,227,0.64),
+    49.7vw 81.4vh 2px 0.4px rgba(236,239,227,0.82), 28.1vw 17.2vh 0 -0.4px rgba(236,239,227,0.62), 41.6vw 61.1vh 0 0 rgba(236,239,227,0.64),
+    97.2vw 44.4vh 2px 0.4px rgba(194,212,74,0.61), 5.1vw 69.0vh 0 0 rgba(236,239,227,0.64), 2.9vw 14.0vh 0 0 rgba(236,239,227,0.51),
+    24.3vw 14.5vh 0 0 rgba(194,212,74,0.79), 62.7vw 63.9vh 0 0 rgba(236,239,227,0.93), 20.5vw 46.6vh 0 0 rgba(127,196,212,0.60),
+    71.0vw 18.2vh 0 0 rgba(236,239,227,0.66), 52.0vw 60.0vh 0 0 rgba(236,239,227,0.68), 89.8vw 9.4vh 0 -0.4px rgba(236,239,227,0.83),
+    45.4vw 61.1vh 0 0 rgba(236,239,227,0.67), 87.2vw 77.5vh 0 0 rgba(236,239,227,0.71), 21.1vw 70.3vh 0 0 rgba(236,239,227,0.79),
+    21.9vw 87.4vh 0 0 rgba(236,239,227,0.94), 78.5vw 31.8vh 0 -0.4px rgba(236,239,227,0.89), 9.1vw 43.3vh 0 0 rgba(236,239,227,0.85),
+    3.8vw 78.7vh 0 -0.4px rgba(194,212,74,0.84), 33.8vw 76.6vh 0 0 rgba(127,196,212,0.64), 71.9vw 81.6vh 0 0 rgba(236,239,227,0.93);
+}
+@keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+
+.shooting {
+  position: absolute; width: 2px; height: 2px; border-radius: 50%;
+  background: #F4F7E4; box-shadow: 0 0 6px 1px rgba(194,212,74,0.8);
+  opacity: 0; transform: rotate(-32deg);
+  animation: shoot 12s linear infinite;
+}
+.shooting::after {
+  content: ''; position: absolute; top: 50%; left: 1px; width: 110px; height: 1px; transform: translateY(-50%);
+  background: linear-gradient(90deg, rgba(236,239,227,0.9), rgba(175,194,46,0.35) 40%, transparent);
+}
+.shooting:nth-child(1) { top: 14%; left: 64%; animation-duration: 11s; animation-delay: -1s; }
+.shooting:nth-child(2) { top: 7%;  left: 93%; animation-duration: 13s; animation-delay: -5s; }
+.shooting:nth-child(3) { top: 32%; left: 40%; animation-duration: 12s; animation-delay: -8.5s; }
+.shooting:nth-child(4) { top: 24%; left: 82%; animation-duration: 14s; animation-delay: -11s; }
+@keyframes shoot {
+  0%   { opacity: 0; transform: rotate(-32deg) translateX(0); }
+  1.5% { opacity: 1; }
+  7%   { opacity: 1; }
+  9%, 100% { opacity: 0; transform: rotate(-32deg) translateX(-440px); }
+}
+
+/* nothing animates while the sky is hidden */
+[data-theme="light"] .shooting,
+[data-theme="light"] .page-stars::before,
+[data-theme="light"] .page-stars::after { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .shooting { display: none; }
+  .page-stars::before, .page-stars::after { animation: none; }
+}
+
+[data-theme="light"] .cursor-dot, [data-theme="light"] .cursor-ring { mix-blend-mode: normal; }
+[data-theme="light"] .cursor-dot { width: 8px; height: 8px; background: var(--olive); box-shadow: 0 0 0 1.5px rgba(241,244,233,0.9); }
+[data-theme="light"] .cursor-ring { border-width: 1.5px; border-color: var(--olive);
+  box-shadow: 0 0 0 1px rgba(241,244,233,0.8), inset 0 0 0 1px rgba(241,244,233,0.8); }
